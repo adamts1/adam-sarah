@@ -12,6 +12,7 @@ export default {
           light: '#FBF0E8',
           dark: '#EDD5C4',
         },
+        'image-bg': '#FFE9C7',
         coral: {
           DEFAULT: '#E7624F',
           light: '#EE8A7C',

@@ -39,7 +39,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-peach text-coral-dark">
+    <section className="min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-peach text-coral-dark">
       <div className="w-full flex flex-row justify-between items-center gap-4 mb-10 md:mb-14">
         <div className="min-h-[3.5rem] flex flex-col justify-center text-end">
           <p className="text-sm uppercase tracking-widest text-coral-dark/70 mb-1">{t.parentsBride}</p>

@@ -28,7 +28,7 @@ export default function App() {
     >
       <div className="animate-page-enter opacity-0">
         <Hero lang={lang} onLangChange={setLang} />
-      <SectionDivider />
+      <SectionDivider minimalOnMobile />
       <InvitationDetails lang={lang} />
       <SectionDivider />
       <RSVP lang={lang} />

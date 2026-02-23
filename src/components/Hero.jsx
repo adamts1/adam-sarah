@@ -12,9 +12,9 @@ export default function Hero({ lang = 'heb', onLangChange }) {
   const heroImage = heroImages[lang] ?? headHeb
 
   return (
-    <header className="w-full min-h-[90vh] flex flex-col items-center justify-center px-4 py-4 bg-peach">
+    <header className="w-full min-h-screen flex flex-col items-center justify-center px-4 py-4 bg-[#FFE9C7]">
       {/* single flag button will be rendered over the image */}
-      <div className="relative w-full max-w-xl md:max-w-2xl lg:max-w-4xl flex-1 flex flex-col min-h-0">
+      <div className="relative w-full max-w-xl md:max-w-2xl lg:max-w-4xl flex-1 flex flex-col min-h-0 bg-[#FFE9C7] overflow-hidden">
         {onLangChange && (
           <div className="absolute top-3 left-3 z-20">
             <button
@@ -30,10 +30,10 @@ export default function Hero({ lang = 'heb', onLangChange }) {
         <img
           src={heroImage}
           alt="הזמנה לחתונה"
-          className="w-full h-full min-h-0 object-contain rounded-sm shadow-soft-lg animate-fade-in flex-1"
+          className="block w-full h-full min-h-0 object-contain rounded-sm shadow-soft-lg animate-fade-in flex-1"
         />
-        <div className="absolute left-1/2 bottom-4 transform -translate-x-1/2 w-full px-4">
-          <Countdown embedded />
+        <div className="absolute left-1/2 bottom-4 transform -translate-x-1/2 w-full px-4 border-0">
+          <Countdown embedded lang={lang} />
         </div>
       </div>
     </header>

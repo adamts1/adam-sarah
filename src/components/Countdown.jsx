@@ -1,11 +1,15 @@
 /**
- * ספירה לאחור – ימים, שעות, דקות, שניות עד התאריך המבוקש.
- * תאריך יעד: 15 במאי 2026
+ * ספירה לאחור – ימים, שעות, דקות, שניות. תמיכה בעברית וצרפתית.
  */
 
 import { useState, useEffect } from 'react'
 
 const TARGET_DATE = new Date(2026, 4, 15, 17, 0, 0) // 15/5/2026 17:00
+
+const labels = {
+  heb: { days: 'ימים', hours: 'שעות', minutes: 'דקות', seconds: 'שניות', done: 'הגיע היום! 🎉' },
+  fr: { days: 'jours', hours: 'heures', minutes: 'minutes', seconds: 'secondes', done: "C'est le grand jour ! 🎉" },
+}
 
 function pad(n) {
   return String(n).padStart(2, '0')
@@ -24,32 +28,33 @@ function getTimeLeft() {
   return { days, hours, minutes, seconds, done: false }
 }
 
-export default function Countdown({ embedded = false }) {
+export default function Countdown({ embedded = false, lang = 'heb' }) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)
+  const t = labels[lang] || labels.heb
 
   useEffect(() => {
-    const t = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
-    return () => clearInterval(t)
+    const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    return () => clearInterval(id)
   }, [])
 
   const Wrapper = embedded ? 'div' : 'section'
-  const wrapperClass = embedded ? 'w-full max-w-2xl mx-auto' : 'py-12 md:py-16 px-4 bg-peach'
+  const wrapperClass = embedded ? 'w-full max-w-2xl mx-auto border-0' : 'py-12 md:py-16 px-4 bg-peach'
 
   if (timeLeft.done) {
     return (
       <Wrapper className={wrapperClass}>
         <div className="max-w-2xl mx-auto text-center">
-          <p className="font-display text-2xl text-coral-dark">הגיע היום! 🎉</p>
+          <p className="font-display text-2xl text-coral-dark">{t.done}</p>
         </div>
       </Wrapper>
     )
   }
 
   const units = [
-    { value: timeLeft.days, label: 'ימים' },
-    { value: timeLeft.hours, label: 'שעות' },
-    { value: timeLeft.minutes, label: 'דקות' },
-    { value: timeLeft.seconds, label: 'שניות' },
+    { value: timeLeft.days, label: t.days },
+    { value: timeLeft.hours, label: t.hours },
+    { value: timeLeft.minutes, label: t.minutes },
+    { value: timeLeft.seconds, label: t.seconds },
   ]
 
   const isCompact = embedded

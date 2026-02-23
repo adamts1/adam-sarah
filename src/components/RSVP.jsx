@@ -91,7 +91,7 @@ export default function RSVP({ lang = 'heb' }) {
 
   if (submitted) {
     return (
-      <section id="rsvp" className="py-16 md:py-24 px-6 md:px-10 bg-peach">
+      <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-peach">
         <div className="max-w-lg mx-auto text-center">
           <div className="bg-peach-light rounded-2xl shadow-soft-lg p-8 md:p-10 border border-coral/20">
             <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4">
@@ -108,7 +108,7 @@ export default function RSVP({ lang = 'heb' }) {
   }
 
   return (
-    <section id="rsvp" className="py-16 md:py-24 px-6 md:px-10 bg-peach text-coral-dark">
+    <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-peach text-coral-dark">
       <div className="max-w-lg mx-auto">
         <h2 className="font-display text-3xl md:text-4xl text-center text-coral-dark mb-2">
           RSVP
