@@ -12,9 +12,14 @@ export default function Hero({ lang = 'heb', onLangChange }) {
   const heroImage = heroImages[lang] ?? headHeb
 
   return (
-    <header className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-4 bg-[#FFE9C7]">
-      {/* single flag button will be rendered over the image */}
-      <div className="relative w-full max-w-xl md:max-w-2xl lg:max-w-4xl flex-1 flex flex-col min-h-0 bg-[#FFE9C7] overflow-hidden">
+    <header className="w-full h-[80vh] flex flex-col items-stretch px-0 py-0 bg-[#FFE9C7]">
+      {/* Image fills full section height; clock and flag overlay */}
+      <div className="relative w-full flex-1 min-h-0 flex flex-col">
+        <img
+          src={heroImage}
+          alt="הזמנה לחתונה"
+          className="absolute inset-0 w-full h-full object-cover rounded-none"
+        />
         {onLangChange && (
           <div className="absolute top-3 left-3 z-20">
             <button
@@ -27,12 +32,7 @@ export default function Hero({ lang = 'heb', onLangChange }) {
             </button>
           </div>
         )}
-        <img
-          src={heroImage}
-          alt="הזמנה לחתונה"
-          className="block w-full h-full min-h-0 object-contain rounded-sm shadow-soft-lg animate-fade-in flex-1"
-        />
-        <div className="absolute left-1/2 bottom-4 transform -translate-x-1/2 w-full px-4 border-0">
+        <div className="absolute left-1/2 bottom-4 transform -translate-x-1/2 w-full px-4 z-10">
           <Countdown embedded lang={lang} />
         </div>
       </div>
