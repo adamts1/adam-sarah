@@ -12,7 +12,7 @@ export default function Hero({ lang = 'heb', onLangChange }) {
   const heroImage = heroImages[lang] ?? headHeb
 
   return (
-    <header className="w-full min-h-screen flex flex-col items-center justify-center px-4 py-4 bg-[#FFE9C7]">
+    <header className="w-full min-h-[80vh] flex flex-col items-center justify-center px-4 py-4 bg-[#FFE9C7]">
       {/* single flag button will be rendered over the image */}
       <div className="relative w-full max-w-xl md:max-w-2xl lg:max-w-4xl flex-1 flex flex-col min-h-0 bg-[#FFE9C7] overflow-hidden">
         {onLangChange && (
