@@ -9,9 +9,6 @@ const initialValues = {
   name: '',
   phone: '',
   adults: 0,
-  chuppah: false,
-  friday: false,
-  shabbat: false,
   message: '',
 }
 const initialErrors = { name: '', phone: '' }
@@ -22,10 +19,6 @@ const texts = {
     nameLabel: 'שם מלא *',
     phoneLabel: 'מס׳ טלפון *',
     adults: 'מבוגרים',
-    events: 'הגעה לאירועים',
-    chuppah: 'חופה',
-    friday: 'יום שישי ערב',
-    shabbat: 'יום שבת צהריים',
     messageLabel: 'המילה שלכם לחתן ולכלה',
     submit: 'שלח',
     ariaMinus: 'הפחת',
@@ -42,10 +35,6 @@ const texts = {
     nameLabel: 'Nom complet *',
     phoneLabel: 'Téléphone *',
     adults: 'Adultes',
-    events: 'Présence aux événements',
-    chuppah: 'Houppa (mariage)',
-    friday: 'Vendredi soir',
-    shabbat: 'Shabbat après-midi',
     messageLabel: 'Votre message aux mariés',
     submit: 'Envoyer',
     ariaMinus: 'Diminuer',
@@ -185,42 +174,6 @@ export default function RSVP({ lang = 'heb' }) {
               >
                 <span className="text-lg leading-none">+</span>
               </button>
-            </div>
-          </div>
-
-          <div>
-            <p className="font-sans text-sm font-medium text-coral-dark mb-2">{t.events}</p>
-            <div className="flex flex-wrap gap-6">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="chuppah"
-                  checked={form.chuppah}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-coral-dark/40 text-coral focus:ring-coral/20"
-                />
-                <span className="font-sans text-sm text-coral-dark">{t.chuppah}</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="friday"
-                  checked={form.friday}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-coral-dark/40 text-coral focus:ring-coral/20"
-                />
-                <span className="font-sans text-sm text-coral-dark">{t.friday}</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="shabbat"
-                  checked={form.shabbat}
-                  onChange={handleChange}
-                  className="w-4 h-4 rounded border-coral-dark/40 text-coral focus:ring-coral/20"
-                />
-                <span className="font-sans text-sm text-coral-dark">{t.shabbat}</span>
-              </label>
             </div>
           </div>
 
