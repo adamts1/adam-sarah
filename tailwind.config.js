@@ -23,6 +23,7 @@ export default {
         'fade-in': 'fadeIn 1s ease-out forwards',
         'page-enter': 'pageEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
         'music-btn-enter': 'musicBtnEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards',
+        'lang-switch': 'langSwitch 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
       },
       keyframes: {
         fadeIn: {
@@ -32,6 +33,10 @@ export default {
         pageEnter: {
           '0%': { opacity: '0', transform: 'translateY(24px) scale(0.98)' },
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
+        langSwitch: {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         musicBtnEnter: {
           '0%': { opacity: '0', transform: 'translateY(16px) scale(0.9)' },

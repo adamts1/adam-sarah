@@ -36,7 +36,7 @@ export default function App() {
           {lang === 'heb' ? '🇫🇷' : '🇮🇱'}
         </button>
       </div>
-      <div className="animate-page-enter opacity-0">
+      <div key={lang} className="animate-page-enter opacity-0">
         <Hero lang={lang} />
       <SectionDivider minimalOnMobile hidePoint />
       <InvitationDetails lang={lang} />

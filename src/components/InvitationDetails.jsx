@@ -42,13 +42,13 @@ export default function InvitationDetails({ lang = 'heb' }) {
 
   return (
     <section className="min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
-      <div className="w-full flex flex-row justify-between items-center gap-4 mb-10 md:mb-14">
-        <div className="min-h-[3.5rem] flex flex-col justify-center text-end">
-          <p className="text-sm uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
+      <div className="w-full flex flex-row justify-between items-start gap-4 mb-10 md:mb-14">
+        <div className="flex flex-col text-end">
+          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
           <p className="font-sans text-base md:text-xl">{t.brideNames}</p>
         </div>
-        <div className="min-h-[3.5rem] flex flex-col justify-center text-start">
-          <p className="text-sm uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
+        <div className="flex flex-col text-start">
+          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
           <p className="font-sans text-base md:text-xl">{t.groomNames}</p>
         </div>
       </div>
