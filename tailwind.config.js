@@ -8,11 +8,11 @@ export default {
     extend: {
       colors: {
         peach: {
-          DEFAULT: '#F8E7D6',
+          DEFAULT: '#FFE9CF',
           light: '#FBF0E8',
           dark: '#EDD5C4',
         },
-        'image-bg': '#FFE9C7',
+        'image-bg': '#FFE9CF',
         coral: {
           DEFAULT: '#E7624F',
           light: '#EE8A7C',

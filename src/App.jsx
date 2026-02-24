@@ -26,8 +26,19 @@ export default function App() {
       dir={isFr ? 'ltr' : 'rtl'}
       lang={isFr ? 'fr' : 'he'}
     >
+      {/* Language button: fixed, outside header */}
+      <div className="fixed top-3 left-3 z-[9999]">
+        <button
+          type="button"
+          onClick={() => setLang(lang === 'heb' ? 'fr' : 'heb')}
+          aria-label={lang === 'heb' ? 'Switch to Français' : 'Switch to עברית'}
+          className="flex items-center justify-center text-2xl bg-transparent border-0 p-0 cursor-pointer"
+        >
+          {lang === 'heb' ? '🇫🇷' : '🇮🇱'}
+        </button>
+      </div>
       <div className="animate-page-enter opacity-0">
-        <Hero lang={lang} onLangChange={setLang} />
+        <Hero lang={lang} />
       <SectionDivider minimalOnMobile />
       <InvitationDetails lang={lang} />
       <SectionDivider />

@@ -3,6 +3,8 @@
  * תמיכה בעברית וצרפתית.
  */
 
+import Countdown from './Countdown'
+
 const MAPS_URL = 'https://www.google.com/maps/search/גני+התארוחה+תל+אביב'
 const WAZE_URL = 'https://waze.com/ul?q=גני%20התארוחה%20תל%20אביב'
 
@@ -15,7 +17,7 @@ const texts = {
     intro: "בשמחה רבה ובהודיה אינסופית לה' אנו שמחים להזמינכם לחגוג עמנו את נישואי ילדינו",
     date: '10 במאי 2026',
     venue: 'גני התארוחה תל אביב',
-    afterCeremony: 'לאחר טקס החופה, תיערך קבלת פנים וחגיגות',
+    afterCeremony: 'לאחר טקס החופה ייערך קוקטייל וחגיגות.',
     footer: 'בליבנו זיכרון סבינו וסבתותינו שאינם עמנו עוד, אך שמחתנו מהדהדת גם עבורם',
     ariaMaps: 'גוגל מאפס',
     ariaWaze: 'ווייז',
@@ -79,9 +81,12 @@ export default function InvitationDetails({ lang = 'heb' }) {
         <p className="text-center font-sans text-lg md:text-xl text-coral-dark mb-1">
           {t.venue}
         </p>
-        <p className="text-center font-sans text-base text-coral-dark/80 mb-6">
+        <p className="text-center font-sans text-base text-coral-dark/80 mb-4">
           {t.afterCeremony}
         </p>
+        <div className="flex justify-center mb-8">
+          <Countdown embedded lang={lang} />
+        </div>
 
         <div className="flex justify-center gap-4 mb-10">
           <a
