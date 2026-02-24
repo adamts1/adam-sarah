@@ -97,9 +97,9 @@ export default function RSVP({ lang = 'heb' }) {
 
   if (submitted) {
     return (
-      <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-[#FFE9CF]">
+      <section id="rsvp" className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF]">
         <div className="max-w-lg mx-auto text-center">
-          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-8 md:p-10 border border-coral/20">
+          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20">
             <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4">
               <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -108,7 +108,7 @@ export default function RSVP({ lang = 'heb' }) {
             <h2 className="font-display text-2xl text-black mb-2">{t.thankYou}</h2>
             <p className="text-black/80">{t.successMsg}</p>
           </div>
-          <div id="contact" className="mt-12 pt-8 border-t border-black/20 text-center">
+          <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center">
             <h2 className="font-display text-xl md:text-2xl text-black mb-4">{t.contactTitle}</h2>
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans">
               <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
@@ -125,16 +125,16 @@ export default function RSVP({ lang = 'heb' }) {
   }
 
   return (
-    <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-[#FFE9CF] text-black">
+    <section id="rsvp" className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] text-black">
       <div className="max-w-lg mx-auto">
         <h2 className="font-display text-3xl md:text-4xl text-center text-black mb-2">
           RSVP
         </h2>
-        <p className="text-center font-sans text-base text-black/80 mb-8">
+        <p className="text-center font-sans text-base text-black/80 mb-4 md:mb-8">
           {t.intro}
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
           <div>
             <label htmlFor="name" className="block font-sans text-sm font-medium text-black mb-1">
               {t.nameLabel}
@@ -203,8 +203,8 @@ export default function RSVP({ lang = 'heb' }) {
               name="message"
               value={form.message}
               onChange={handleChange}
-              rows={4}
-              className={`${inputBase} resize-y min-h-[100px]`}
+              rows={3}
+              className={`${inputBase} resize-y min-h-[80px] md:min-h-[100px]`}
             />
           </div>
 
@@ -216,9 +216,9 @@ export default function RSVP({ lang = 'heb' }) {
           </button>
         </form>
 
-        <div id="contact" className="mt-12 pt-8 border-t border-black/20 text-center">
-          <h2 className="font-display text-xl md:text-2xl text-black mb-4">{t.contactTitle}</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans">
+        <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center max-md:text-end">
+          <h2 className="font-display text-xl md:text-2xl text-black mb-3 md:mb-4">{t.contactTitle}</h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans max-md:items-end">
             <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
               {t.adam}: +972 52-5600493
             </a>
