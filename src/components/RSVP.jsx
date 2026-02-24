@@ -4,6 +4,7 @@
  */
 
 import { useState } from 'react'
+import footerBg from '../../assets/footer.png'
 
 const initialValues = {
   name: '',
@@ -15,10 +16,13 @@ const initialErrors = { name: '', phone: '' }
 
 const texts = {
   heb: {
+    rsvp: 'אישור הגעה',
     intro: 'מחכים בקוצר רוח לחגוג איתכם את הרגעים היקרים הללו!',
     contactTitle: 'יצירת קשר',
     adam: 'אדם',
     sarah: 'שרה',
+    phoneAdam: '052-5600493',
+    phoneSarah: '055-3161876',
     nameLabel: 'שם מלא *',
     phoneLabel: 'מס׳ טלפון *',
     adults: 'מבוגרים',
@@ -34,10 +38,13 @@ const texts = {
     errPhoneInvalid: 'נא להזין מספר טלפון תקין',
   },
   fr: {
+    rsvp: 'RSVP',
     intro: 'Nous avons hâte de célébrer avec vous ces moments précieux !',
     contactTitle: 'Nous contacter',
     adam: 'Adam',
     sarah: 'Sarah',
+    phoneAdam: '+972 52-5600493',
+    phoneSarah: '+972 55-3161876',
     nameLabel: 'Nom complet *',
     phoneLabel: 'Téléphone *',
     adults: 'Adultes',
@@ -97,7 +104,11 @@ export default function RSVP({ lang = 'heb' }) {
 
   if (submitted) {
     return (
-      <section id="rsvp" className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF]">
+      <section
+        id="rsvp"
+        className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${footerBg})` }}
+      >
         <div className="max-w-lg mx-auto text-center">
           <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20">
             <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4">
@@ -110,12 +121,12 @@ export default function RSVP({ lang = 'heb' }) {
           </div>
           <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center">
             <h2 className="font-display text-xl md:text-2xl text-black mb-4">{t.contactTitle}</h2>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans pb-4">
               <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
-                {t.adam}: +972 52-5600493
+                {t.adam}: {t.phoneAdam}
               </a>
               <a href="tel:+972553161876" className="text-black hover:opacity-80 transition-opacity">
-                {t.sarah}: +972 55-3161876
+                {t.sarah}: {t.phoneSarah}
               </a>
             </div>
           </div>
@@ -125,10 +136,14 @@ export default function RSVP({ lang = 'heb' }) {
   }
 
   return (
-    <section id="rsvp" className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] text-black">
+    <section
+      id="rsvp"
+      className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat text-black"
+      style={{ backgroundImage: `url(${footerBg})` }}
+    >
       <div className="max-w-lg mx-auto">
         <h2 className="font-display text-3xl md:text-4xl text-center text-black mb-2">
-          RSVP
+          {t.rsvp}
         </h2>
         <p className="text-center font-sans text-base text-black/80 mb-4 md:mb-8">
           {t.intro}
@@ -216,14 +231,14 @@ export default function RSVP({ lang = 'heb' }) {
           </button>
         </form>
 
-        <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center max-md:text-end">
+        <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center">
           <h2 className="font-display text-xl md:text-2xl text-black mb-3 md:mb-4">{t.contactTitle}</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans max-md:items-end">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-8 font-sans pb-10">
             <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
-              {t.adam}: +972 52-5600493
+              {t.adam}: {t.phoneAdam}
             </a>
             <a href="tel:+972553161876" className="text-black hover:opacity-80 transition-opacity">
-              {t.sarah}: +972 55-3161876
+              {t.sarah}: {t.phoneSarah}
             </a>
           </div>
         </div>

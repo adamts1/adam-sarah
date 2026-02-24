@@ -12,3 +12,23 @@
     @apply text-black font-sans antialiased;
   }
 }
+
+/* Force contact section LTR – never changes in Hebrew/RTL */
+#contact {
+  direction: ltr !important;
+  text-align: center !important;
+  unicode-bidi: embed;
+}
+#contact * {
+  direction: ltr !important;
+  unicode-bidi: embed;
+}
+/* Keep links in order: Adam, then Sarah – no reversal in Hebrew/RTL */
+#contact .contact-links {
+  flex-direction: column !important;
+}
+@media (min-width: 640px) {
+  #contact .contact-links {
+    flex-direction: row !important;
+  }
+}
