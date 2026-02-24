@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { tailwindColors } from './src/theme/colors.js'
+
 export default {
   content: [
     "./index.html",
@@ -7,16 +9,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        peach: {
-          DEFAULT: '#FFE9CF',
-          light: '#FBF0E8',
-          dark: '#EDD5C4',
-        },
-        'image-bg': '#FFE9CF',
-        coral: {
-          DEFAULT: '#E7624F',
-          light: '#EE8A7C',
-          dark: '#D04A38',
+        ...tailwindColors,
+        gray: {
+          200: '#000000',
         },
       },
       fontFamily: {

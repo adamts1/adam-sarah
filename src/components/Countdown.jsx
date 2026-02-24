@@ -38,13 +38,13 @@ export default function Countdown({ embedded = false, lang = 'heb' }) {
   }, [])
 
   const Wrapper = embedded ? 'div' : 'section'
-  const wrapperClass = embedded ? 'w-full max-w-2xl mx-auto border-0' : 'py-12 md:py-16 px-4 bg-peach'
+  const wrapperClass = embedded ? 'w-full max-w-2xl mx-auto border-0' : 'py-12 md:py-16 px-4 bg-[#FFE9CF]'
 
   if (timeLeft.done) {
     return (
       <Wrapper className={wrapperClass}>
         <div className="max-w-2xl mx-auto text-center">
-          <p className="font-display text-2xl text-coral-dark">{t.done}</p>
+          <p className="font-display text-2xl text-black">{t.done}</p>
         </div>
       </Wrapper>
     )
@@ -65,12 +65,12 @@ export default function Countdown({ embedded = false, lang = 'heb' }) {
           {units.map(({ value, label }) => (
             <div
               key={label}
-              className={`flex flex-col items-center rounded-lg bg-peach-light/90 border border-coral/20 ${isCompact ? 'min-w-[2.5rem] md:min-w-[3rem] py-1.5 px-1.5 md:py-2 md:px-2 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
+              className={`flex flex-col items-center rounded-lg bg-[#FFE9CF]/90 border border-coral/20 ${isCompact ? 'min-w-[2.5rem] md:min-w-[3rem] py-1.5 px-1.5 md:py-2 md:px-2 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
             >
-              <span className={`font-display text-coral tabular-nums ${isCompact ? 'text-lg md:text-xl' : 'text-3xl md:text-4xl'}`}>
+              <span className={`font-display text-black tabular-nums ${isCompact ? 'text-lg md:text-xl' : 'text-3xl md:text-4xl'}`}>
                 {pad(value)}
               </span>
-              <span className={`font-sans text-coral-dark/80 ${isCompact ? 'text-[10px] md:text-xs mt-0.5' : 'text-sm mt-1'}`}>{label}</span>
+              <span className={`font-sans text-black/80 ${isCompact ? 'text-[10px] md:text-xs mt-0.5' : 'text-sm mt-1'}`}>{label}</span>
             </div>
           ))}
         </div>

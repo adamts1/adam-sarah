@@ -7,7 +7,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Hero from './components/Hero'
 import InvitationDetails from './components/InvitationDetails'
 import RSVP from './components/RSVP'
-import Contact from './components/Contact'
 import SectionDivider from './components/SectionDivider'
 
 export default function App() {
@@ -22,7 +21,7 @@ export default function App() {
   const isFr = lang === 'fr'
   return (
     <div
-      className="min-h-screen bg-peach"
+      className="min-h-screen bg-[#FFE9CF]"
       dir={isFr ? 'ltr' : 'rtl'}
       lang={isFr ? 'fr' : 'he'}
     >
@@ -43,8 +42,6 @@ export default function App() {
       <InvitationDetails lang={lang} />
       <SectionDivider />
       <RSVP lang={lang} />
-      <SectionDivider />
-      <Contact lang={lang} />
       </div>
     </div>
   )

@@ -16,6 +16,9 @@ const initialErrors = { name: '', phone: '' }
 const texts = {
   heb: {
     intro: 'מחכים בקוצר רוח לחגוג איתכם את הרגעים היקרים הללו!',
+    contactTitle: 'יצירת קשר',
+    adam: 'אדם',
+    sarah: 'שרה',
     nameLabel: 'שם מלא *',
     phoneLabel: 'מס׳ טלפון *',
     adults: 'מבוגרים',
@@ -32,6 +35,9 @@ const texts = {
   },
   fr: {
     intro: 'Nous avons hâte de célébrer avec vous ces moments précieux !',
+    contactTitle: 'Nous contacter',
+    adam: 'Adam',
+    sarah: 'Sarah',
     nameLabel: 'Nom complet *',
     phoneLabel: 'Téléphone *',
     adults: 'Adultes',
@@ -59,7 +65,7 @@ function validate(values, lang) {
 }
 
 const inputBase =
-  'w-full px-4 py-3 rounded-lg border border-coral-dark/30 bg-white/80 text-coral-dark placeholder:text-coral-dark/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
+  'w-full px-4 py-3 rounded-lg border border-black/30 bg-[#F3E3FF] text-black placeholder:text-black/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
 
 export default function RSVP({ lang = 'heb' }) {
   const [form, setForm] = useState(initialValues)
@@ -91,16 +97,27 @@ export default function RSVP({ lang = 'heb' }) {
 
   if (submitted) {
     return (
-      <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-peach">
+      <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-[#FFE9CF]">
         <div className="max-w-lg mx-auto text-center">
-          <div className="bg-peach-light rounded-2xl shadow-soft-lg p-8 md:p-10 border border-coral/20">
+          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-8 md:p-10 border border-coral/20">
             <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4">
-              <svg className="w-7 h-7 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="font-display text-2xl text-coral-dark mb-2">{t.thankYou}</h2>
-            <p className="text-coral-dark/80">{t.successMsg}</p>
+            <h2 className="font-display text-2xl text-black mb-2">{t.thankYou}</h2>
+            <p className="text-black/80">{t.successMsg}</p>
+          </div>
+          <div id="contact" className="mt-12 pt-8 border-t border-black/20 text-center">
+            <h2 className="font-display text-xl md:text-2xl text-black mb-4">{t.contactTitle}</h2>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans">
+              <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
+                {t.adam}: +972 52-5600493
+              </a>
+              <a href="tel:+972553161876" className="text-black hover:opacity-80 transition-opacity">
+                {t.sarah}: +972 55-3161876
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -108,18 +125,18 @@ export default function RSVP({ lang = 'heb' }) {
   }
 
   return (
-    <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-peach text-coral-dark">
+    <section id="rsvp" className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-10 bg-[#FFE9CF] text-black">
       <div className="max-w-lg mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl text-center text-coral-dark mb-2">
+        <h2 className="font-display text-3xl md:text-4xl text-center text-black mb-2">
           RSVP
         </h2>
-        <p className="text-center font-sans text-base text-coral-dark/80 mb-8">
+        <p className="text-center font-sans text-base text-black/80 mb-8">
           {t.intro}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="name" className="block font-sans text-sm font-medium text-coral-dark mb-1">
+            <label htmlFor="name" className="block font-sans text-sm font-medium text-black mb-1">
               {t.nameLabel}
             </label>
             <input
@@ -132,12 +149,12 @@ export default function RSVP({ lang = 'heb' }) {
               autoComplete="name"
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-coral" role="alert">{errors.name}</p>
+              <p className="mt-1 text-sm text-black" role="alert">{errors.name}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="phone" className="block font-sans text-sm font-medium text-coral-dark mb-1">
+            <label htmlFor="phone" className="block font-sans text-sm font-medium text-black mb-1">
               {t.phoneLabel}
             </label>
             <input
@@ -150,27 +167,27 @@ export default function RSVP({ lang = 'heb' }) {
               autoComplete="tel"
             />
             {errors.phone && (
-              <p className="mt-1 text-sm text-coral" role="alert">{errors.phone}</p>
+              <p className="mt-1 text-sm text-black" role="alert">{errors.phone}</p>
             )}
           </div>
 
           <div className="flex items-center justify-between gap-4">
-            <label className="font-sans text-sm font-medium text-coral-dark">{t.adults}</label>
-            <div className="flex items-center border border-coral-dark/30 rounded-lg overflow-hidden bg-white/80">
+            <label className="font-sans text-sm font-medium text-black">{t.adults}</label>
+            <div className="flex items-center border border-black/30 rounded-lg overflow-hidden bg-[#F3E3FF]">
               <button
                 type="button"
                 onClick={() => setAdults(-1)}
                 aria-label={t.ariaMinus}
-                className="w-10 h-10 flex items-center justify-center text-coral-dark hover:bg-coral-dark/10 transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-black hover:bg-black/10 transition-colors"
               >
                 <span className="text-lg leading-none">−</span>
               </button>
-              <span className="w-12 text-center font-sans text-coral-dark tabular-nums">{form.adults}</span>
+              <span className="w-12 text-center font-sans text-black tabular-nums">{form.adults}</span>
               <button
                 type="button"
                 onClick={() => setAdults(1)}
                 aria-label={t.ariaPlus}
-                className="w-10 h-10 flex items-center justify-center text-coral-dark hover:bg-coral-dark/10 transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-black hover:bg-black/10 transition-colors"
               >
                 <span className="text-lg leading-none">+</span>
               </button>
@@ -178,7 +195,7 @@ export default function RSVP({ lang = 'heb' }) {
           </div>
 
           <div>
-            <label htmlFor="message" className="block font-sans text-sm font-medium text-coral-dark mb-1">
+            <label htmlFor="message" className="block font-sans text-sm font-medium text-black mb-1">
               {t.messageLabel}
             </label>
             <textarea
@@ -193,11 +210,23 @@ export default function RSVP({ lang = 'heb' }) {
 
           <button
             type="submit"
-            className="w-full py-3.5 px-6 rounded-lg border-2 border-coral-dark/40 bg-transparent text-coral-dark font-sans font-medium hover:bg-coral-dark/10 transition-colors"
+            className="w-full py-3.5 px-6 rounded-lg border-2 border-black bg-transparent text-black font-sans font-medium hover:bg-black/10 transition-colors"
           >
             {t.submit}
           </button>
         </form>
+
+        <div id="contact" className="mt-12 pt-8 border-t border-black/20 text-center">
+          <h2 className="font-display text-xl md:text-2xl text-black mb-4">{t.contactTitle}</h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 font-sans">
+            <a href="tel:+972525600493" className="text-black hover:opacity-80 transition-opacity">
+              {t.adam}: +972 52-5600493
+            </a>
+            <a href="tel:+972553161876" className="text-black hover:opacity-80 transition-opacity">
+              {t.sarah}: +972 55-3161876
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

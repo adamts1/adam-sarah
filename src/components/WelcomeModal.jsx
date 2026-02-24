@@ -30,11 +30,11 @@ export default function WelcomeModal({ lang = 'heb', onClose }) {
       aria-modal="true"
       aria-labelledby="welcome-modal-title"
     >
-      <div className="relative w-full max-w-md rounded-2xl bg-peach-light shadow-soft-lg border border-coral/20 p-8 text-coral-dark">
+      <div className="relative w-full max-w-md rounded-2xl bg-[#FFE9CF] shadow-soft-lg border border-coral/20 p-8 text-black">
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-4 end-4 w-10 h-10 rounded-full flex items-center justify-center text-coral-dark/70 hover:bg-coral/15 hover:text-coral-dark transition-colors"
+          className="absolute top-4 end-4 w-10 h-10 rounded-full flex items-center justify-center text-black/70 hover:bg-coral/15 hover:text-black transition-colors"
           aria-label="סגור"
         >
           &#10005;
@@ -43,11 +43,11 @@ export default function WelcomeModal({ lang = 'heb', onClose }) {
         <div className="text-center pt-2">
           <h2
             id="welcome-modal-title"
-            className="font-display text-2xl md:text-3xl text-coral-dark mb-1"
+            className="font-display text-2xl md:text-3xl text-black mb-1"
           >
             {t.title}
           </h2>
-          <p className="font-sans text-lg text-coral-dark/90 mb-8">
+          <p className="font-sans text-lg text-black/90 mb-8">
             {t.subtitle}
           </p>
 

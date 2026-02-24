@@ -41,25 +41,25 @@ export default function InvitationDetails({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-peach text-coral-dark">
+    <section className="min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
       <div className="w-full flex flex-row justify-between items-center gap-4 mb-10 md:mb-14">
         <div className="min-h-[3.5rem] flex flex-col justify-center text-end">
-          <p className="text-sm uppercase tracking-widest text-coral-dark/70 mb-1">{t.parentsBride}</p>
+          <p className="text-sm uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
           <p className="font-sans text-base md:text-xl">{t.brideNames}</p>
         </div>
         <div className="min-h-[3.5rem] flex flex-col justify-center text-start">
-          <p className="text-sm uppercase tracking-widest text-coral-dark/70 mb-1">{t.parentsGroom}</p>
+          <p className="text-sm uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
           <p className="font-sans text-base md:text-xl">{t.groomNames}</p>
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto">
-        <p className="text-center font-sans text-base md:text-lg text-coral-dark/90 leading-relaxed mb-8 md:mb-12 max-w-xl mx-auto">
+        <p className="text-center font-sans text-base md:text-lg text-black/90 leading-relaxed mb-8 md:mb-12 max-w-xl mx-auto">
           {t.intro}
         </p>
 
         <div className="text-center mb-6 md:mb-8">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-coral-dark tracking-wide">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-black tracking-wide">
             {lang === 'fr' ? 'Sarah & Adam' : 'שרה & אדם'}
           </h2>
         </div>
@@ -69,7 +69,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
           <span className="block w-16 h-px bg-coral-dark/40" />
         </div>
 
-        <p className="text-center font-sans text-xl md:text-2xl text-coral-dark mb-2">
+        <p className="text-center font-sans text-xl md:text-2xl text-black mb-2">
           {t.date}
         </p>
 
@@ -78,10 +78,10 @@ export default function InvitationDetails({ lang = 'heb' }) {
           <span className="block w-16 h-px bg-coral-dark/40" />
         </div>
 
-        <p className="text-center font-sans text-lg md:text-xl text-coral-dark mb-1">
+        <p className="text-center font-sans text-lg md:text-xl text-black mb-1">
           {t.venue}
         </p>
-        <p className="text-center font-sans text-base text-coral-dark/80 mb-4">
+        <p className="text-center font-sans text-base text-black/80 mb-4">
           {t.afterCeremony}
         </p>
         <div className="flex justify-center mb-8">
@@ -94,7 +94,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.ariaMaps}
-            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-coral-dark/40 text-coral-dark hover:bg-coral-dark/10 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black/40 text-black hover:bg-black/10 transition-colors"
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
@@ -105,7 +105,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.ariaWaze}
-            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-coral-dark/40 text-coral-dark hover:bg-coral-dark/10 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black/40 text-black hover:bg-black/10 transition-colors"
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2L4.5 20.29l1.35.71L12 18l6.15 3 1.35-.71L12 2z" />
@@ -113,7 +113,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
           </a>
         </div>
 
-        <p className="text-center font-sans text-sm text-coral-dark/70 mt-8 max-w-md mx-auto leading-relaxed">
+        <p className="text-center font-sans text-sm text-black/70 mt-8 max-w-md mx-auto leading-relaxed">
           {t.footer}
         </p>
       </div>

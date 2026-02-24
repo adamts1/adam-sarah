@@ -39,7 +39,7 @@ export default function SpotifyBackgroundMusic({ isPlaying: controlledPlaying, o
       {/* Spotify bar + stop: show when playing */}
       {isPlaying && (
         <div
-          className="fixed bottom-0 inset-x-0 z-40 h-[88px] flex items-center justify-end gap-2 px-2 py-1 bg-gradient-to-t from-peach/95 to-transparent pointer-events-none"
+          className="fixed bottom-0 inset-x-0 z-40 h-[88px] flex items-center justify-end gap-2 px-2 py-1 bg-gradient-to-t from-[#FFE9CF]/95 to-transparent pointer-events-none"
           style={{ direction: 'ltr' }}
         >
           <div className="pointer-events-auto flex-1 min-w-0 max-w-[320px] h-[80px] mx-auto opacity-85">

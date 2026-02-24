@@ -1,10 +1,9 @@
 /**
- * Hero – ראש הדף: תמונת ההזמנה, שעון ספירה לאחור בחלק התחתון של התמונה.
+ * Hero – ראש הדף: תמונת ההזמנה.
  */
 
 import headHeb from '../../assets/heb.png'
 import headFr from '../../assets/fr.png'
-import Countdown from './Countdown'
 
 const heroImages = { heb: headHeb, fr: headFr }
 
@@ -19,9 +18,6 @@ export default function Hero({ lang = 'heb' }) {
           alt="הזמנה לחתונה"
           className="block w-full h-full min-h-0 object-contain rounded-sm shadow-soft-lg animate-fade-in flex-1"
         />
-        <div className="absolute left-1/2 bottom-4 transform -translate-x-1/2 w-full px-4 border-0">
-          <Countdown embedded lang={lang} />
-        </div>
       </div>
     </header>
   )

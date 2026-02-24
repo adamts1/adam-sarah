@@ -25,30 +25,30 @@ export default function ShabbatHatan({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-peach text-coral-dark">
+    <section className="py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
       <div className="max-w-xl mx-auto text-center">
         <h2 className="font-sans text-xl md:text-2xl font-medium tracking-wide mb-3">
           {t.title}
         </h2>
 
-        <p className="font-display text-3xl md:text-4xl text-coral-dark tracking-wide mb-10">
+        <p className="font-display text-3xl md:text-4xl text-black tracking-wide mb-10">
           {lang === 'fr' ? 'Sarah & Adam' : 'שרה & אדם'}
         </p>
 
-        <p className="font-sans text-xl text-coral-dark mb-2">
+        <p className="font-sans text-xl text-black mb-2">
           {t.date}
         </p>
-        <p className="font-sans text-coral-dark/90 mb-6">
+        <p className="font-sans text-black/90 mb-6">
           {t.times}
         </p>
 
-        <p className="font-sans text-lg md:text-xl text-coral-dark mb-8">
+        <p className="font-sans text-lg md:text-xl text-black mb-8">
           {t.venue}
         </p>
 
-        <div className="font-sans text-sm text-coral-dark/80">
+        <div className="font-sans text-sm text-black/80">
           <p>{t.parasha}</p>
-          <p className="mt-0.5 text-coral-dark/70">{t.parashaEn}</p>
+          <p className="mt-0.5 text-black/70">{t.parashaEn}</p>
         </div>
       </div>
     </section>

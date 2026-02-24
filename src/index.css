@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* RTL-aware base; smooth scrolling */
+/* Main background: #FFE9CF (palette in src/theme/colors.js) */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-peach text-coral-dark font-sans antialiased;
+    background-color: #FFE9CF;
+    @apply text-black font-sans antialiased;
   }
 }
