@@ -48,6 +48,10 @@ export default {
         'soft': '0 4px 20px rgba(0, 0, 0, 0.06)',
         'soft-lg': '0 10px 40px rgba(0, 0, 0, 0.08)',
       },
+      minHeight: {
+        'screen-dvh': '100dvh',
+        'screen-safe': '100dvh',
+      },
     },
   },
   plugins: [],

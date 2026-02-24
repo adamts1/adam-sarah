@@ -6,11 +6,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     background-color: #FFE9CF;
+    overflow-x: hidden;
     @apply text-black font-sans antialiased;
   }
+}
+
+/* Prevent horizontal overflow from any child */
+#root {
+  overflow-x: clip;
+}
+
+/* Safe area for fixed elements on notched devices */
+.safe-area-inset {
+  top: max(0.75rem, env(safe-area-inset-top, 0px));
+  left: max(0.75rem, env(safe-area-inset-left, 0px));
 }
 
 /* Force contact section LTR – never changes in Hebrew/RTL */

@@ -106,7 +106,7 @@ export default function RSVP({ lang = 'heb' }) {
     return (
       <section
         id="rsvp"
-        className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat"
+        className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{ backgroundImage: `url(${footerBg})` }}
       >
         <div className="max-w-lg mx-auto text-center">
@@ -138,7 +138,7 @@ export default function RSVP({ lang = 'heb' }) {
   return (
     <section
       id="rsvp"
-      className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat text-black"
+      className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat text-black overflow-hidden"
       style={{ backgroundImage: `url(${footerBg})` }}
     >
       <div className="max-w-lg mx-auto">

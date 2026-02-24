@@ -21,12 +21,12 @@ export default function App() {
   const isFr = lang === 'fr'
   return (
     <div
-      className="min-h-screen bg-[#FFE9CF]"
+      className="min-h-screen-dvh md:min-h-screen bg-[#FFE9CF]"
       dir={isFr ? 'ltr' : 'rtl'}
       lang={isFr ? 'fr' : 'he'}
     >
       {/* Language button: fixed, outside header */}
-      <div className="fixed top-3 left-3 z-[9999]">
+      <div className="fixed z-[9999] safe-area-inset">
         <button
           type="button"
           onClick={() => setLang(lang === 'heb' ? 'fr' : 'heb')}

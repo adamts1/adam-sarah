@@ -41,15 +41,15 @@ export default function InvitationDetails({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
-      <div className="w-full flex flex-row justify-between items-start gap-4 mb-10 md:mb-14">
-        <div className="flex flex-col text-end">
+    <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
+      <div className="w-full flex flex-row justify-between items-start gap-2 md:gap-4 mb-10 md:mb-14 min-w-0 overflow-hidden">
+        <div className="flex flex-col text-end min-w-0 flex-1 overflow-hidden">
           <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
-          <p className="font-sans text-base md:text-xl">{t.brideNames}</p>
+          <p className="font-sans text-base md:text-xl break-words">{t.brideNames}</p>
         </div>
-        <div className="flex flex-col text-start">
+        <div className="flex flex-col text-start min-w-0 flex-1 overflow-hidden">
           <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
-          <p className="font-sans text-base md:text-xl">{t.groomNames}</p>
+          <p className="font-sans text-base md:text-xl break-words">{t.groomNames}</p>
         </div>
       </div>
 
