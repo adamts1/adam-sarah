@@ -269,11 +269,11 @@ export default function RSVP({ lang = 'heb' }) {
                   type="text"
                   value={guest.name}
                   onChange={(e) => updateGuestName(i, e.target.value)}
-                  className={inputBase}
+                  className={`${inputBase} ${nameErrors[i] ? 'border-red-500 ring-2 ring-red-200' : ''}`}
                   autoComplete="name"
                 />
                 {nameErrors[i] && (
-                  <p className="mt-1 text-sm text-black" role="alert">{nameErrors[i]}</p>
+                  <p className="mt-1 text-sm text-red-600" role="alert">{nameErrors[i]}</p>
                 )}
               </div>
             </div>
@@ -292,11 +292,11 @@ export default function RSVP({ lang = 'heb' }) {
               type="tel"
               value={phone}
               onChange={(e) => { setPhone(e.target.value); setPhoneError('') }}
-              className={inputBase}
+              className={`${inputBase} ${phoneError ? 'border-red-500 ring-2 ring-red-200' : ''}`}
               autoComplete="tel"
             />
             {phoneError && (
-              <p className="mt-1 text-sm text-black" role="alert">{phoneError}</p>
+              <p className="mt-1 text-sm text-red-600" role="alert">{phoneError}</p>
             )}
           </div>
 
