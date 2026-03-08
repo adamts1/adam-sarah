@@ -43,15 +43,15 @@ export default function App() {
       <SectionDivider />
       <RSVP lang={lang} />
       <div
-        className="w-full h-[48px] md:h-[64px]"
+        className="relative w-full h-[48px] md:h-[64px]"
         style={{
-          background: 'radial-gradient(ellipse 50% 100% at 50% 100%, #E8853A 99%, transparent 100%)',
-          backgroundSize: '95px 100%',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'center',
+          background: 'radial-gradient(69% 113% at 50% 116%, rgb(232, 133, 58) 98%, transparent 99%) center center / 95px 103% repeat-x',
         }}
-        aria-hidden="true"
-      />
+      >
+        <p className="absolute inset-0 flex items-end justify-center pb-0 text-[10px] font-bold text-gray-700">
+          &copy; TSITYAT - AI Agency
+        </p>
+      </div>
       </div>
     </div>
   )
