@@ -4,7 +4,6 @@
  */
 
 import Countdown from './Countdown'
-import israelEntryImg from '../../assets/heb.png'
 
 const WAZE_URL = 'https://waze.com/ul?q=meitav%2013%20tel-aviv'
 
@@ -110,14 +109,9 @@ export default function InvitationDetails({ lang = 'heb' }) {
             href="https://israel-entry.piba.gov.il/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block mx-auto mt-6 max-w-xs md:max-w-sm hover:opacity-80 transition-opacity"
+            className="block text-center font-sans text-sm text-black underline hover:opacity-70 transition-opacity mt-6"
           >
-            <img
-              src={israelEntryImg}
-              alt="Formulaire d'entrée en Israël"
-              className="w-full rounded-lg shadow-soft border border-black/10"
-            />
-            <p className="text-center font-sans text-sm text-black/70 mt-2">Formulaire d'entrée en Israël</p>
+            Formulaire d'entrée en Israël
           </a>
         )}
 
