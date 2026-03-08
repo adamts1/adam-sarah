@@ -23,8 +23,8 @@ const texts = {
   fr: {
     parentsBride: 'Les parents de la mariée',
     parentsGroom: 'Les parents du marié',
-    brideNames: 'Monsieur et Madame Gil et Sophie Alouche',
-    groomNames: 'Monsieur et Madame Naïm et Michelle Tsityat',
+    brideNames: 'M. & Mme Gil et Sophie Alouche',
+    groomNames: 'M. & Mme Naïm et Michelle Tsityat',
     intro: "Ont la joie de vous inviter au mariage de",
     date: '25 mai 2026',
     venue: 'EAST-TLV',
@@ -38,13 +38,13 @@ export default function InvitationDetails({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-center py-12 md:py-20 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
+    <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-start pt-16 md:pt-24 pb-8 md:pb-12 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
       <div className="w-full flex flex-row justify-between items-start gap-2 md:gap-4 mb-10 md:mb-14 min-w-0 overflow-hidden">
-        <div className="flex flex-col text-end min-w-0 flex-1 overflow-hidden">
+        <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
           <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
           <p className="font-sans text-base md:text-xl break-words">{t.brideNames}</p>
         </div>
-        <div className="flex flex-col text-start min-w-0 flex-1 overflow-hidden">
+        <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
           <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
           <p className="font-sans text-base md:text-xl break-words">{t.groomNames}</p>
         </div>
