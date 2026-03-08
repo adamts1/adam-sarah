@@ -65,7 +65,7 @@ export default function Countdown({ embedded = false, lang = 'heb' }) {
           {units.map(({ value, label }) => (
             <div
               key={label}
-              className={`flex flex-col items-center rounded-lg bg-[#FFE9CF]/90 border border-coral/20 ${isCompact ? 'min-w-[2.5rem] md:min-w-[3rem] py-1.5 px-1.5 md:py-2 md:px-2 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
+              className={`flex flex-col items-center rounded-lg bg-[#FFE9CF]/90 border border-[#C4956A] ${isCompact ? 'min-w-[2.5rem] md:min-w-[3rem] py-1.5 px-1.5 md:py-2 md:px-2 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
             >
               <span className={`font-display text-black tabular-nums ${isCompact ? 'text-lg md:text-xl' : 'text-3xl md:text-4xl'}`}>
                 {pad(value)}

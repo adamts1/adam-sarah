@@ -23,7 +23,7 @@ const texts = {
   fr: {
     parentsBride: 'Les parents de la mariée',
     parentsGroom: 'Les parents du marié',
-    brideNames: 'M. & Mme Gil et Sophie Alouche',
+    brideNames: 'M. & Mme Gilles et Sophie Allouche',
     groomNames: 'M. & Mme Naïm et Michelle Tsityat',
     intro: "Ont la joie de vous inviter au mariage de",
     date: '25 mai 2026',
@@ -61,10 +61,6 @@ export default function InvitationDetails({ lang = 'heb' }) {
           </h2>
         </div>
 
-        <div className="flex justify-center mb-2">
-          <span className="block w-32 h-px bg-coral-dark/40" />
-        </div>
-
         <p className="text-center font-sans text-xl md:text-2xl text-black mb-2">
           {t.date}
         </p>
@@ -72,11 +68,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
           <Countdown embedded lang={lang} />
         </div>
 
-        <div className="flex justify-center mt-2 mb-8 md:mb-12">
-          <span className="block w-32 h-px bg-coral-dark/40" />
-        </div>
-
-        <p className="text-center font-sans text-lg md:text-xl text-black mb-1">
+        <p className="text-center font-sans text-lg md:text-xl text-black mb-1 mt-8 md:mt-12">
           {t.venue}
         </p>
         <p className="text-center font-sans text-base text-black/80 mb-4">
