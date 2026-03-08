@@ -61,18 +61,19 @@ export default function InvitationDetails({ lang = 'heb' }) {
           </h2>
         </div>
 
-        <div className="flex justify-center gap-3 mb-2">
-          <span className="block w-16 h-px bg-coral-dark/40" />
-          <span className="block w-16 h-px bg-coral-dark/40" />
+        <div className="flex justify-center mb-2">
+          <span className="block w-32 h-px bg-coral-dark/40" />
         </div>
 
         <p className="text-center font-sans text-xl md:text-2xl text-black mb-2">
           {t.date}
         </p>
+        <div className="flex justify-center mb-4">
+          <Countdown embedded lang={lang} />
+        </div>
 
-        <div className="flex justify-center gap-3 mt-2 mb-8 md:mb-12">
-          <span className="block w-16 h-px bg-coral-dark/40" />
-          <span className="block w-16 h-px bg-coral-dark/40" />
+        <div className="flex justify-center mt-2 mb-8 md:mb-12">
+          <span className="block w-32 h-px bg-coral-dark/40" />
         </div>
 
         <p className="text-center font-sans text-lg md:text-xl text-black mb-1">
@@ -81,9 +82,6 @@ export default function InvitationDetails({ lang = 'heb' }) {
         <p className="text-center font-sans text-base text-black/80 mb-4">
           {t.afterCeremony}
         </p>
-        <div className="flex justify-center mb-8">
-          <Countdown embedded lang={lang} />
-        </div>
 
         <div className="flex justify-center gap-4 mb-10">
           <a
