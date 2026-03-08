@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react'
-import footerBg from '../../assets/footer.png'
+
 import { supabase } from '../lib/supabase'
 import emailjs from '@emailjs/browser'
 
@@ -185,8 +185,7 @@ export default function RSVP({ lang = 'heb' }) {
     return (
       <section
         id="rsvp"
-        className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat overflow-hidden"
-        style={{ backgroundImage: `url(${footerBg})` }}
+        className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] overflow-hidden"
       >
         <div className="max-w-lg mx-auto text-center">
           <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20">
@@ -217,8 +216,7 @@ export default function RSVP({ lang = 'heb' }) {
   return (
     <section
       id="rsvp"
-      className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-cover bg-center bg-no-repeat text-black overflow-hidden"
-      style={{ backgroundImage: `url(${footerBg})` }}
+      className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] text-black overflow-hidden"
     >
       <div className="max-w-lg mx-auto">
         <h2 className="font-display text-3xl md:text-4xl text-center text-black mb-2">
