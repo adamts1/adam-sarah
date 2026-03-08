@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react'
 
-const TARGET_DATE = new Date(2026, 4, 15, 17, 0, 0) // 15/5/2026 17:00
+const TARGET_DATE = new Date(2026, 4, 25, 18, 0, 0) // 25/5/2026 18:00
 
 const labels = {
   heb: { days: 'ימים', hours: 'שעות', minutes: 'דקות', seconds: 'שניות', done: 'הגיע היום! 🎉' },
