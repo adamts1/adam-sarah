@@ -1,18 +1,12 @@
 /**
  * Section 4 – RSVP: טופס אישור הגעה בסגנון ההזמנה.
- * שם, טלפון, מבוגרים, בחירת אירועים, הודעה, כפתור שלח.
+ * שם, טלפון × מספר אורחים, הודעה משותפת, שליחה למייל + Supabase.
  */
 
 import { useState } from 'react'
 import footerBg from '../../assets/footer.png'
-
-const initialValues = {
-  name: '',
-  phone: '',
-  adults: 0,
-  message: '',
-}
-const initialErrors = { name: '', phone: '' }
+import { supabase } from '../lib/supabase'
+import emailjs from '@emailjs/browser'
 
 const texts = {
   heb: {
@@ -23,11 +17,13 @@ const texts = {
     sarah: 'שרה',
     phoneAdam: '052-5600493',
     phoneSarah: '055-3161876',
+    adults: 'מספר אורחים',
+    guestLabel: (i) => `אורח ${i + 1}`,
     nameLabel: 'שם מלא *',
     phoneLabel: 'מס׳ טלפון *',
-    adults: 'מבוגרים',
     messageLabel: 'המילה שלכם לחתן ולכלה',
     submit: 'שלח',
+    submitting: 'שולח...',
     ariaMinus: 'הפחת',
     ariaPlus: 'הוסף',
     thankYou: 'תודה על האישור',
@@ -36,6 +32,9 @@ const texts = {
     errNameShort: 'שם מלא חייב להכיל לפחות 2 תווים',
     errPhone: 'נא להזין מספר טלפון',
     errPhoneInvalid: 'נא להזין מספר טלפון תקין',
+    errMinGuests: 'נא להוסיף לפחות אורח אחד',
+    errSubmit: 'שגיאה בשליחה, נסו שוב',
+    removeGuest: 'הסר',
   },
   fr: {
     rsvp: 'RSVP',
@@ -45,11 +44,13 @@ const texts = {
     sarah: 'Sarah',
     phoneAdam: '+972 52-5600493',
     phoneSarah: '+972 55-3161876',
+    adults: 'Nombre d\'invités',
+    guestLabel: (i) => `Invité ${i + 1}`,
     nameLabel: 'Nom complet *',
     phoneLabel: 'Téléphone *',
-    adults: 'Adultes',
     messageLabel: 'Votre message aux mariés',
     submit: 'Envoyer',
+    submitting: 'Envoi en cours...',
     ariaMinus: 'Diminuer',
     ariaPlus: 'Augmenter',
     thankYou: 'Merci pour votre confirmation',
@@ -58,48 +59,126 @@ const texts = {
     errNameShort: 'Le nom doit contenir au moins 2 caractères',
     errPhone: 'Veuillez indiquer un numéro de téléphone',
     errPhoneInvalid: 'Veuillez indiquer un numéro de téléphone valide',
+    errMinGuests: 'Veuillez ajouter au moins un invité',
+    errSubmit: 'Erreur lors de l\'envoi, veuillez réessayer',
+    removeGuest: 'Supprimer',
   },
 }
 
-function validate(values, lang) {
+function validateGuests(guests, lang) {
   const t = texts[lang] || texts.heb
-  const errors = { ...initialErrors }
-  if (!values.name.trim()) errors.name = t.errName
-  else if (values.name.trim().length < 2) errors.name = t.errNameShort
-  if (!values.phone.trim()) errors.phone = t.errPhone
-  else if (!/^[\d\s\-+()]{9,20}$/.test(values.phone.trim())) errors.phone = t.errPhoneInvalid
-  return errors
+  return guests.map((g) => {
+    const errors = { name: '', phone: '' }
+    if (!g.name.trim()) errors.name = t.errName
+    else if (g.name.trim().length < 2) errors.name = t.errNameShort
+    if (!g.phone.trim()) errors.phone = t.errPhone
+    else if (!/^[\d\s\-+()]{9,20}$/.test(g.phone.trim())) errors.phone = t.errPhoneInvalid
+    return errors
+  })
 }
 
 const inputBase =
   'w-full px-4 py-3 rounded-lg border border-black/30 bg-[#F3E3FF] text-black placeholder:text-black/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
 
+const emptyGuest = () => ({ name: '', phone: '' })
+
 export default function RSVP({ lang = 'heb' }) {
-  const [form, setForm] = useState(initialValues)
-  const [errors, setErrors] = useState(initialErrors)
+  const [guests, setGuests] = useState([emptyGuest()])
+  const [message, setMessage] = useState('')
+  const [guestErrors, setGuestErrors] = useState([{ name: '', phone: '' }])
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const t = texts[lang] || texts.heb
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    const next = type === 'checkbox' ? checked : value
-    setForm((prev) => ({ ...prev, [name]: next }))
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }))
+  const setGuestCount = (delta) => {
+    setGuests((prev) => {
+      const newCount = Math.max(1, Math.min(20, prev.length + delta))
+      if (newCount > prev.length) {
+        const added = Array.from({ length: newCount - prev.length }, emptyGuest)
+        return [...prev, ...added]
+      }
+      return prev.slice(0, newCount)
+    })
+    setGuestErrors((prev) => {
+      const newCount = Math.max(1, Math.min(20, prev.length + delta))
+      if (newCount > prev.length) {
+        const added = Array.from({ length: newCount - prev.length }, () => ({ name: '', phone: '' }))
+        return [...prev, ...added]
+      }
+      return prev.slice(0, newCount)
+    })
   }
 
-  const setAdults = (delta) => {
-    setForm((prev) => ({
-      ...prev,
-      adults: Math.max(0, Math.min(20, (Number(prev.adults) || 0) + delta)),
-    }))
+  const updateGuest = (index, field, value) => {
+    setGuests((prev) => prev.map((g, i) => (i === index ? { ...g, [field]: value } : g)))
+    setGuestErrors((prev) =>
+      prev.map((e, i) => (i === index ? { ...e, [field]: '' } : e))
+    )
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const nextErrors = validate(form, lang)
-    const hasError = Object.values(nextErrors).some(Boolean)
-    setErrors(nextErrors)
-    if (!hasError) setSubmitted(true)
+    setSubmitError('')
+
+    if (guests.length === 0) {
+      setSubmitError(t.errMinGuests)
+      return
+    }
+
+    const errors = validateGuests(guests, lang)
+    setGuestErrors(errors)
+    const hasError = errors.some((e) => e.name || e.phone)
+    if (hasError) return
+
+    setSubmitting(true)
+
+    try {
+      // Insert each guest as a row in Supabase
+      const rows = guests.map((g) => ({
+        name: g.name.trim(),
+        phone: g.phone.trim(),
+        message: message.trim(),
+        lang,
+        created_at: new Date().toISOString(),
+      }))
+
+      if (supabase) {
+        const { error: dbError } = await supabase.from('rsvp').insert(rows)
+        if (dbError) throw dbError
+      }
+
+      // Send one email with all guest details
+      const guestList = guests
+        .map((g, i) => `${i + 1}. ${g.name} — ${g.phone}`)
+        .join('\n')
+
+      const emailParams = {
+        to_email: import.meta.env.VITE_NOTIFICATION_EMAIL,
+        guest_count: String(guests.length),
+        guest_list: guestList,
+        message: message.trim() || '—',
+      }
+
+      try {
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          emailParams,
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        )
+      } catch {
+        // Email failure is non-critical — data is already saved in Supabase
+        console.warn('Email notification failed, but RSVP was saved.')
+      }
+
+      setSubmitted(true)
+    } catch (err) {
+      console.error('RSVP submission error:', err)
+      setSubmitError(t.errSubmit)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -150,57 +229,22 @@ export default function RSVP({ lang = 'heb' }) {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
-          <div>
-            <label htmlFor="name" className="block font-sans text-sm font-medium text-black mb-1">
-              {t.nameLabel}
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={form.name}
-              onChange={handleChange}
-              className={inputBase}
-              autoComplete="name"
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-black" role="alert">{errors.name}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="block font-sans text-sm font-medium text-black mb-1">
-              {t.phoneLabel}
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={form.phone}
-              onChange={handleChange}
-              className={inputBase}
-              autoComplete="tel"
-            />
-            {errors.phone && (
-              <p className="mt-1 text-sm text-black" role="alert">{errors.phone}</p>
-            )}
-          </div>
-
+          {/* Guest count selector */}
           <div className="flex items-center justify-between gap-4">
             <label className="font-sans text-sm font-medium text-black">{t.adults}</label>
             <div className="flex items-center border border-black/30 rounded-lg overflow-hidden bg-[#F3E3FF]">
               <button
                 type="button"
-                onClick={() => setAdults(-1)}
+                onClick={() => setGuestCount(-1)}
                 aria-label={t.ariaMinus}
                 className="w-10 h-10 flex items-center justify-center text-black hover:bg-black/10 transition-colors"
               >
                 <span className="text-lg leading-none">−</span>
               </button>
-              <span className="w-12 text-center font-sans text-black tabular-nums">{form.adults}</span>
+              <span className="w-12 text-center font-sans text-black tabular-nums">{guests.length}</span>
               <button
                 type="button"
-                onClick={() => setAdults(1)}
+                onClick={() => setGuestCount(1)}
                 aria-label={t.ariaPlus}
                 className="w-10 h-10 flex items-center justify-center text-black hover:bg-black/10 transition-colors"
               >
@@ -209,25 +253,80 @@ export default function RSVP({ lang = 'heb' }) {
             </div>
           </div>
 
+          {/* Dynamic guest fields */}
+          {guests.map((guest, i) => (
+            <div
+              key={i}
+              className="rounded-xl border border-black/15 bg-[#FFE9CF]/40 p-4 space-y-3"
+            >
+              <p className="font-sans text-sm font-semibold text-black/70">{t.guestLabel(i)}</p>
+
+              <div>
+                <label
+                  htmlFor={`name-${i}`}
+                  className="block font-sans text-sm font-medium text-black mb-1"
+                >
+                  {t.nameLabel}
+                </label>
+                <input
+                  id={`name-${i}`}
+                  type="text"
+                  value={guest.name}
+                  onChange={(e) => updateGuest(i, 'name', e.target.value)}
+                  className={inputBase}
+                  autoComplete="name"
+                />
+                {guestErrors[i]?.name && (
+                  <p className="mt-1 text-sm text-black" role="alert">{guestErrors[i].name}</p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor={`phone-${i}`}
+                  className="block font-sans text-sm font-medium text-black mb-1"
+                >
+                  {t.phoneLabel}
+                </label>
+                <input
+                  id={`phone-${i}`}
+                  type="tel"
+                  value={guest.phone}
+                  onChange={(e) => updateGuest(i, 'phone', e.target.value)}
+                  className={inputBase}
+                  autoComplete="tel"
+                />
+                {guestErrors[i]?.phone && (
+                  <p className="mt-1 text-sm text-black" role="alert">{guestErrors[i].phone}</p>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {/* Shared message */}
           <div>
             <label htmlFor="message" className="block font-sans text-sm font-medium text-black mb-1">
               {t.messageLabel}
             </label>
             <textarea
               id="message"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               rows={3}
               className={`${inputBase} resize-y min-h-[80px] md:min-h-[100px]`}
             />
           </div>
 
+          {submitError && (
+            <p className="text-sm text-red-700 text-center" role="alert">{submitError}</p>
+          )}
+
           <button
             type="submit"
-            className="w-full py-3.5 px-6 rounded-lg border-2 border-black bg-transparent text-black font-sans font-medium hover:bg-black/10 transition-colors"
+            disabled={submitting}
+            className="w-full py-3.5 px-6 rounded-lg border-2 border-black bg-transparent text-black font-sans font-medium hover:bg-black/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {t.submit}
+            {submitting ? t.submitting : t.submit}
           </button>
         </form>
 
