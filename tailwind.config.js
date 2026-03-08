@@ -25,7 +25,6 @@ export default {
         'page-enter': 'pageEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
         'music-btn-enter': 'musicBtnEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards',
         'lang-switch': 'langSwitch 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-        'confetti-fall': 'confettiFall 3s ease-in forwards',
         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
         'bounce-in': 'bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards',
       },
@@ -46,10 +45,6 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(16px) scale(0.9)' },
           '70%': { opacity: '1', transform: 'translateY(-2px) scale(1.02)' },
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
-        },
-        confettiFall: {
-          '0%': { opacity: '1', transform: 'translateY(0) translateX(0) rotate(0deg)' },
-          '100%': { opacity: '0', transform: 'translateY(100vh) translateX(var(--drift)) rotate(720deg)' },
         },
         fadeInUp: {
           '0%': { opacity: '0', transform: 'translateY(30px) scale(0.95)' },

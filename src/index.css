@@ -26,6 +26,35 @@
   left: max(0.75rem, env(safe-area-inset-left, 0px));
 }
 
+/* Confetti celebration animation */
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(var(--drift, 0px)) rotate(720deg) scale(0.5);
+  }
+}
+
+@keyframes confettiRise {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) translateX(var(--drift, 0px)) rotate(-720deg) scale(0.5);
+  }
+}
+
 /* Force contact section LTR – never changes in Hebrew/RTL */
 #contact {
   direction: ltr !important;

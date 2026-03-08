@@ -79,22 +79,26 @@ function validateGuests(guests, phone, lang) {
 const CONFETTI_COLORS = ['#FFD700', '#FF6B6B', '#C084FC', '#F472B6', '#34D399', '#60A5FA', '#FBBF24', '#F3E3FF']
 const CONFETTI_SHAPES = ['circle', 'square', 'heart']
 
+function makePieces(count, direction) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: `${direction}-${i}`,
+    left: Math.random() * 100,
+    delay: Math.random() * 2,
+    duration: 2.5 + Math.random() * 2,
+    size: 6 + Math.random() * 10,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    shape: CONFETTI_SHAPES[Math.floor(Math.random() * CONFETTI_SHAPES.length)],
+    rotation: Math.random() * 360,
+    drift: -30 + Math.random() * 60,
+    direction,
+  }))
+}
+
 function Confetti() {
   const [pieces, setPieces] = useState([])
 
   useEffect(() => {
-    const items = Array.from({ length: 60 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 2,
-      duration: 2.5 + Math.random() * 2,
-      size: 6 + Math.random() * 10,
-      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
-      shape: CONFETTI_SHAPES[Math.floor(Math.random() * CONFETTI_SHAPES.length)],
-      rotation: Math.random() * 360,
-      drift: -30 + Math.random() * 60,
-    }))
-    setPieces(items)
+    setPieces([...makePieces(40, 'down'), ...makePieces(40, 'up')])
   }, [])
 
   return (
@@ -102,12 +106,11 @@ function Confetti() {
       {pieces.map((p) => (
         <span
           key={p.id}
-          className="absolute animate-confetti-fall"
+          className="absolute"
           style={{
             left: `${p.left}%`,
-            top: '-5%',
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
+            ...(p.direction === 'down' ? { top: '-5%' } : { bottom: '-5%' }),
+            animation: `${p.direction === 'down' ? 'confettiFall' : 'confettiRise'} ${p.duration}s ease-out ${p.delay}s forwards`,
             '--drift': `${p.drift}px`,
           }}
         >
