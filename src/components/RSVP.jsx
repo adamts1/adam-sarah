@@ -65,27 +65,28 @@ const texts = {
   },
 }
 
-function validateGuests(guests, lang) {
+function validateGuests(guests, phone, lang) {
   const t = texts[lang] || texts.heb
-  return guests.map((g) => {
-    const errors = { name: '', phone: '' }
-    if (!g.name.trim()) errors.name = t.errName
-    else if (g.name.trim().length < 2) errors.name = t.errNameShort
-    if (!g.phone.trim()) errors.phone = t.errPhone
-    else if (!/^[\d\s\-+()]{9,20}$/.test(g.phone.trim())) errors.phone = t.errPhoneInvalid
-    return errors
+  const phoneError = !phone.trim() ? t.errPhone : !/^[\d\s\-+()]{9,20}$/.test(phone.trim()) ? t.errPhoneInvalid : ''
+  const nameErrors = guests.map((g) => {
+    if (!g.name.trim()) return t.errName
+    if (g.name.trim().length < 2) return t.errNameShort
+    return ''
   })
+  return { nameErrors, phoneError }
 }
 
 const inputBase =
   'w-full px-4 py-3 rounded-lg border border-black/30 bg-[#F3E3FF] text-black placeholder:text-black/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
 
-const emptyGuest = () => ({ name: '', phone: '' })
+const emptyGuest = () => ({ name: '' })
 
 export default function RSVP({ lang = 'heb' }) {
   const [guests, setGuests] = useState([emptyGuest()])
+  const [phone, setPhone] = useState('')
   const [message, setMessage] = useState('')
-  const [guestErrors, setGuestErrors] = useState([{ name: '', phone: '' }])
+  const [nameErrors, setNameErrors] = useState([''])
+  const [phoneError, setPhoneError] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -100,21 +101,19 @@ export default function RSVP({ lang = 'heb' }) {
       }
       return prev.slice(0, newCount)
     })
-    setGuestErrors((prev) => {
+    setNameErrors((prev) => {
       const newCount = Math.max(1, Math.min(20, prev.length + delta))
       if (newCount > prev.length) {
-        const added = Array.from({ length: newCount - prev.length }, () => ({ name: '', phone: '' }))
+        const added = Array.from({ length: newCount - prev.length }, () => '')
         return [...prev, ...added]
       }
       return prev.slice(0, newCount)
     })
   }
 
-  const updateGuest = (index, field, value) => {
-    setGuests((prev) => prev.map((g, i) => (i === index ? { ...g, [field]: value } : g)))
-    setGuestErrors((prev) =>
-      prev.map((e, i) => (i === index ? { ...e, [field]: '' } : e))
-    )
+  const updateGuestName = (index, value) => {
+    setGuests((prev) => prev.map((g, i) => (i === index ? { name: value } : g)))
+    setNameErrors((prev) => prev.map((e, i) => (i === index ? '' : e)))
   }
 
   const handleSubmit = async (e) => {
@@ -126,10 +125,10 @@ export default function RSVP({ lang = 'heb' }) {
       return
     }
 
-    const errors = validateGuests(guests, lang)
-    setGuestErrors(errors)
-    const hasError = errors.some((e) => e.name || e.phone)
-    if (hasError) return
+    const { nameErrors: nErrors, phoneError: pError } = validateGuests(guests, phone, lang)
+    setNameErrors(nErrors)
+    setPhoneError(pError)
+    if (nErrors.some((e) => e) || pError) return
 
     setSubmitting(true)
 
@@ -137,7 +136,7 @@ export default function RSVP({ lang = 'heb' }) {
       // Insert each guest as a row in Supabase
       const rows = guests.map((g) => ({
         name: g.name.trim(),
-        phone: g.phone.trim(),
+        phone: phone.trim(),
         message: message.trim(),
         lang,
         created_at: new Date().toISOString(),
@@ -150,8 +149,8 @@ export default function RSVP({ lang = 'heb' }) {
 
       // Send one email with all guest details
       const guestList = guests
-        .map((g, i) => `${i + 1}. ${g.name} — ${g.phone}`)
-        .join('\n')
+        .map((g, i) => `${i + 1}. ${g.name}`)
+        .join('\n') + `\nPhone: ${phone.trim()}`
 
       const emailParams = {
         to_email: import.meta.env.VITE_NOTIFICATION_EMAIL,
@@ -251,14 +250,13 @@ export default function RSVP({ lang = 'heb' }) {
             </div>
           </div>
 
-          {/* Dynamic guest fields */}
+          {/* Dynamic guest name fields */}
           {guests.map((guest, i) => (
             <div
               key={i}
               className="rounded-xl border border-black/15 bg-[#FFE9CF]/40 p-4 space-y-3"
             >
               <p className="font-sans text-sm font-semibold text-black/70">{t.guestLabel(i)}</p>
-
               <div>
                 <label
                   htmlFor={`name-${i}`}
@@ -270,36 +268,37 @@ export default function RSVP({ lang = 'heb' }) {
                   id={`name-${i}`}
                   type="text"
                   value={guest.name}
-                  onChange={(e) => updateGuest(i, 'name', e.target.value)}
+                  onChange={(e) => updateGuestName(i, e.target.value)}
                   className={inputBase}
                   autoComplete="name"
                 />
-                {guestErrors[i]?.name && (
-                  <p className="mt-1 text-sm text-black" role="alert">{guestErrors[i].name}</p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor={`phone-${i}`}
-                  className="block font-sans text-sm font-medium text-black mb-1"
-                >
-                  {t.phoneLabel}
-                </label>
-                <input
-                  id={`phone-${i}`}
-                  type="tel"
-                  value={guest.phone}
-                  onChange={(e) => updateGuest(i, 'phone', e.target.value)}
-                  className={inputBase}
-                  autoComplete="tel"
-                />
-                {guestErrors[i]?.phone && (
-                  <p className="mt-1 text-sm text-black" role="alert">{guestErrors[i].phone}</p>
+                {nameErrors[i] && (
+                  <p className="mt-1 text-sm text-black" role="alert">{nameErrors[i]}</p>
                 )}
               </div>
             </div>
           ))}
+
+          {/* Phone – shared for all guests */}
+          <div>
+            <label
+              htmlFor="phone"
+              className="block font-sans text-sm font-medium text-black mb-1"
+            >
+              {t.phoneLabel}
+            </label>
+            <input
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => { setPhone(e.target.value); setPhoneError('') }}
+              className={inputBase}
+              autoComplete="tel"
+            />
+            {phoneError && (
+              <p className="mt-1 text-sm text-black" role="alert">{phoneError}</p>
+            )}
+          </div>
 
           {/* Shared message */}
           <div>
