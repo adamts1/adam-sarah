@@ -3,7 +3,7 @@
  * שם, טלפון × מספר אורחים, הודעה משותפת, שליחה למייל + Supabase.
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { supabase } from '../lib/supabase'
 import emailjs from '@emailjs/browser'
@@ -74,6 +74,63 @@ function validateGuests(guests, phone, lang) {
     return ''
   })
   return { nameErrors, phoneError }
+}
+
+const CONFETTI_COLORS = ['#FFD700', '#FF6B6B', '#C084FC', '#F472B6', '#34D399', '#60A5FA', '#FBBF24', '#F3E3FF']
+const CONFETTI_SHAPES = ['circle', 'square', 'heart']
+
+function Confetti() {
+  const [pieces, setPieces] = useState([])
+
+  useEffect(() => {
+    const items = Array.from({ length: 60 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 2,
+      duration: 2.5 + Math.random() * 2,
+      size: 6 + Math.random() * 10,
+      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      shape: CONFETTI_SHAPES[Math.floor(Math.random() * CONFETTI_SHAPES.length)],
+      rotation: Math.random() * 360,
+      drift: -30 + Math.random() * 60,
+    }))
+    setPieces(items)
+  }, [])
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {pieces.map((p) => (
+        <span
+          key={p.id}
+          className="absolute animate-confetti-fall"
+          style={{
+            left: `${p.left}%`,
+            top: '-5%',
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+            '--drift': `${p.drift}px`,
+          }}
+        >
+          {p.shape === 'heart' ? (
+            <svg width={p.size} height={p.size} viewBox="0 0 24 24" fill={p.color}>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          ) : (
+            <span
+              style={{
+                display: 'block',
+                width: p.size,
+                height: p.size,
+                backgroundColor: p.color,
+                borderRadius: p.shape === 'circle' ? '50%' : '2px',
+                transform: `rotate(${p.rotation}deg)`,
+              }}
+            />
+          )}
+        </span>
+      ))}
+    </div>
+  )
 }
 
 const inputBase =
@@ -182,13 +239,15 @@ export default function RSVP({ lang = 'heb' }) {
 
   if (submitted) {
     return (
+      <>
+      <Confetti />
       <section
         id="rsvp"
         className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] overflow-hidden"
       >
         <div className="max-w-lg mx-auto text-center">
-          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20">
-            <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4">
+          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20 animate-fade-in-up">
+            <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4 animate-bounce-in">
               <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -209,6 +268,7 @@ export default function RSVP({ lang = 'heb' }) {
           </div>
         </div>
       </section>
+      </>
     )
   }
 
