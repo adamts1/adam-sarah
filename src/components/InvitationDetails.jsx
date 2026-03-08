@@ -5,7 +5,6 @@
 
 import Countdown from './Countdown'
 
-const MAPS_URL = 'https://www.google.com/maps/search/גני+התארוחה+תל+אביב'
 const WAZE_URL = 'https://waze.com/ul?q=גני%20התארוחה%20תל%20אביב'
 
 const texts = {
@@ -15,11 +14,10 @@ const texts = {
     brideNames: "מר וגברת ג'יל וסופי אלוש",
     groomNames: 'מר וגברת נעים ומישל ציטיאט',
     intro: "בשמחה רבה ובהודיה אינסופית לה' אנו שמחים להזמינכם לחגוג עמנו את נישואי ילדינו",
-    date: '10 במאי 2026',
-    venue: 'גני התארוחה תל אביב',
-    afterCeremony: 'לאחר טקס החופה ייערך קוקטייל וחגיגות.',
+    date: '25 במאי 2026',
+    venue: 'EAST-TLV',
+    afterCeremony: 'מיטב 13 תל אביב',
     footer: 'בליבנו זיכרון סבינו וסבתותינו שאינם עמנו עוד, אך שמחתנו מהדהדת גם עבורם',
-    ariaMaps: 'גוגל מאפס',
     ariaWaze: 'ווייז',
   },
   fr: {
@@ -27,12 +25,11 @@ const texts = {
     parentsGroom: 'Les parents du marié',
     brideNames: 'Monsieur et Madame Gil et Sophie Alouche',
     groomNames: 'Monsieur et Madame Naïm et Michelle Tsityat',
-    intro: "Avec une grande joie et une infinie gratitude envers D., nous sommes heureux de vous inviter à célébrer avec nous le mariage de nos enfants.",
-    date: '10 mai 2026',
-    venue: 'Ganey HaTa\'arucha, Tel Aviv',
-    afterCeremony: 'Après la cérémonie sous la Houppa, un cocktail et des festivités auront lieu.',
+    intro: "Ont la joie de vous inviter au mariage de",
+    date: '25 mai 2026',
+    venue: 'EAST-TLV',
+    afterCeremony: 'Meitav 13 Tel-Aviv',
     footer: 'Dans nos cœurs, le souvenir de nos grands-parents qui ne sont plus avec nous, mais notre joie résonne aussi pour eux.',
-    ariaMaps: 'Google Maps',
     ariaWaze: 'Waze',
   },
 }
@@ -89,17 +86,6 @@ export default function InvitationDetails({ lang = 'heb' }) {
         </div>
 
         <div className="flex justify-center gap-4 mb-10">
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t.ariaMaps}
-            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black/40 text-black hover:bg-black/10 transition-colors"
-          >
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
-            </svg>
-          </a>
           <a
             href={WAZE_URL}
             target="_blank"
