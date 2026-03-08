@@ -16,6 +16,7 @@ export default {
       },
       fontFamily: {
         display: ['Fredoka', 'Heebo', 'system-ui', 'sans-serif'],
+        opensans: ['Open Sans', 'Heebo', 'system-ui', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
         sans: ['Heebo', 'system-ui', 'sans-serif'],
       },

@@ -218,7 +218,7 @@ export default function RSVP({ lang = 'heb' }) {
       className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] text-black overflow-hidden"
     >
       <div className="max-w-lg mx-auto">
-        <h2 className="font-display text-3xl md:text-4xl text-center text-black mb-2">
+        <h2 className="font-opensans text-3xl md:text-4xl text-center text-black mb-2">
           {t.rsvp}
         </h2>
         <p className="text-center font-sans text-base text-black/80 mb-4 md:mb-8">

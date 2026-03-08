@@ -5,7 +5,7 @@
 
 import Countdown from './Countdown'
 
-const WAZE_URL = 'https://waze.com/ul?q=גני%20התארוחה%20תל%20אביב'
+const WAZE_URL = 'https://waze.com/ul?q=meitav%2013%20tel-aviv'
 
 const texts = {
   heb: {
@@ -41,12 +41,12 @@ export default function InvitationDetails({ lang = 'heb' }) {
     <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-start pt-16 md:pt-24 pb-8 md:pb-12 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
       <div className="w-full flex flex-row justify-between items-start gap-2 md:gap-4 mb-10 md:mb-14 min-w-0 overflow-hidden">
         <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
-          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsBride}</p>
-          <p className="font-sans text-base md:text-xl break-words">{t.brideNames}</p>
+          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{lang === 'fr' ? t.parentsBride : t.parentsGroom}</p>
+          <p className="font-sans text-base md:text-xl break-words">{lang === 'fr' ? t.brideNames : t.groomNames}</p>
         </div>
         <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
-          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{t.parentsGroom}</p>
-          <p className="font-sans text-base md:text-xl break-words">{t.groomNames}</p>
+          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{lang === 'fr' ? t.parentsGroom : t.parentsBride}</p>
+          <p className="font-sans text-base md:text-xl break-words">{lang === 'fr' ? t.groomNames : t.brideNames}</p>
         </div>
       </div>
 
@@ -56,7 +56,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
         </p>
 
         <div className="text-center mb-6 md:mb-8">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-black tracking-wide">
+          <h2 className="font-opensans text-4xl md:text-5xl lg:text-6xl text-black tracking-wide">
             {lang === 'fr' ? 'Sarah & Adam' : 'שרה & אדם'}
           </h2>
         </div>
