@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 
 import { supabase } from '../lib/supabase'
 import emailjs from '@emailjs/browser'
+import celebrationMusic from '../../assets/music.mp3'
 
 const texts = {
   heb: {
@@ -232,6 +233,13 @@ export default function RSVP({ lang = 'heb' }) {
       }
 
       setSubmitted(true)
+      try {
+        const audio = new Audio(celebrationMusic)
+        audio.volume = 0.5
+        audio.play()
+      } catch {
+        // Audio playback is non-critical
+      }
     } catch (err) {
       console.error('RSVP submission error:', err)
       setSubmitError(t.errSubmit)
