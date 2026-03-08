@@ -42,6 +42,16 @@ export default function App() {
       <InvitationDetails lang={lang} />
       <SectionDivider />
       <RSVP lang={lang} />
+      <div
+        className="w-full h-[48px] md:h-[64px]"
+        style={{
+          background: 'radial-gradient(ellipse 50% 100% at 50% 100%, #E8853A 99%, transparent 100%)',
+          backgroundSize: '95px 100%',
+          backgroundRepeat: 'repeat-x',
+          backgroundPosition: 'center',
+        }}
+        aria-hidden="true"
+      />
       </div>
     </div>
   )
