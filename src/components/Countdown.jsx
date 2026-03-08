@@ -61,16 +61,16 @@ export default function Countdown({ embedded = false, lang = 'heb' }) {
   return (
     <Wrapper className={wrapperClass}>
       <div className={isCompact ? 'w-full max-w-full' : 'max-w-2xl mx-auto'}>
-        <div className={`flex flex-wrap justify-center ${isCompact ? 'gap-1.5 md:gap-2' : 'gap-4 md:gap-6'}`}>
+        <div className={`flex flex-wrap justify-center ${isCompact ? 'gap-1.5 md:gap-3 lg:gap-4' : 'gap-4 md:gap-6'}`}>
           {units.map(({ value, label }) => (
             <div
               key={label}
-              className={`flex flex-col items-center rounded-lg bg-[#FFE9CF]/90 border border-[#C4956A] ${isCompact ? 'min-w-[2.5rem] md:min-w-[3rem] py-1.5 px-1.5 md:py-2 md:px-2 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
+              className={`flex flex-col items-center rounded-lg bg-[#FFE9CF]/90 border border-[#C4956A] ${isCompact ? 'min-w-[2.5rem] md:min-w-[4rem] lg:min-w-[5rem] py-1.5 px-1.5 md:py-3 md:px-3 shadow-sm' : 'min-w-[4.5rem] md:min-w-[5.5rem] py-4 px-3 rounded-xl shadow-soft'}`}
             >
-              <span className={`font-display text-black tabular-nums ${isCompact ? 'text-lg md:text-xl' : 'text-3xl md:text-4xl'}`}>
+              <span className={`font-display text-black tabular-nums ${isCompact ? 'text-lg md:text-2xl lg:text-3xl' : 'text-3xl md:text-4xl'}`}>
                 {pad(value)}
               </span>
-              <span className={`font-sans text-black/80 ${isCompact ? 'text-[10px] md:text-xs mt-0.5' : 'text-sm mt-1'}`}>{label}</span>
+              <span className={`font-sans text-black/80 ${isCompact ? 'text-[10px] md:text-sm mt-0.5' : 'text-sm mt-1'}`}>{label}</span>
             </div>
           ))}
         </div>

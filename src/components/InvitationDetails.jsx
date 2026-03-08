@@ -44,44 +44,44 @@ export default function InvitationDetails({ lang = 'heb' }) {
   const t = texts[lang] || texts.heb
 
   return (
-    <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-start pt-16 md:pt-24 pb-8 md:pb-12 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
-      <div className="w-full flex flex-row justify-between items-start gap-2 md:gap-4 mb-10 md:mb-14 min-w-0 overflow-hidden">
+    <section className="min-h-screen-dvh md:min-h-screen flex flex-col justify-center pt-16 md:pt-24 pb-8 md:pb-16 px-6 md:px-10 lg:px-16 bg-[#FFE9CF] text-black">
+      <div className="w-full max-w-3xl mx-auto flex flex-row justify-between items-start gap-2 md:gap-12 mb-10 md:mb-14 min-w-0 overflow-hidden">
         <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
-          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{lang === 'fr' ? t.parentsBride : t.parentsGroom}</p>
-          <p className="font-sans text-base md:text-xl break-words">{lang === 'fr' ? t.brideNames : t.groomNames}</p>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-black/70 mb-1 md:mb-2">{lang === 'fr' ? t.parentsBride : t.parentsGroom}</p>
+          <p className="font-sans text-base md:text-xl lg:text-2xl break-words">{lang === 'fr' ? t.brideNames : t.groomNames}</p>
         </div>
         <div className="flex flex-col text-center min-w-0 flex-1 overflow-hidden">
-          <p className="text-[10px] uppercase tracking-widest text-black/70 mb-1">{lang === 'fr' ? t.parentsGroom : t.parentsBride}</p>
-          <p className="font-sans text-base md:text-xl break-words">{lang === 'fr' ? t.groomNames : t.brideNames}</p>
+          <p className="text-[10px] md:text-xs uppercase tracking-widest text-black/70 mb-1 md:mb-2">{lang === 'fr' ? t.parentsGroom : t.parentsBride}</p>
+          <p className="font-sans text-base md:text-xl lg:text-2xl break-words">{lang === 'fr' ? t.groomNames : t.brideNames}</p>
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto">
-        <p className="text-center font-sans text-base md:text-lg text-black/90 leading-relaxed mb-8 md:mb-12 max-w-xl mx-auto">
+      <div className="max-w-2xl lg:max-w-3xl mx-auto">
+        <p className="text-center font-sans text-base md:text-lg lg:text-xl text-black/90 leading-relaxed mb-8 md:mb-12 max-w-xl lg:max-w-2xl mx-auto">
           {t.intro}
         </p>
 
-        <div className="text-center mb-6 md:mb-8">
-          <h2 className="font-opensans text-4xl md:text-5xl lg:text-6xl text-black tracking-wide">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="font-opensans text-4xl md:text-5xl lg:text-7xl text-black tracking-wide">
             {lang === 'fr' ? 'Sarah & Adam' : 'שרה & אדם'}
           </h2>
         </div>
 
-        <p className="text-center font-sans text-xl md:text-2xl text-black mb-2">
+        <p className="text-center font-sans text-xl md:text-2xl lg:text-3xl text-black mb-2">
           {t.date}
         </p>
         <div className="flex justify-center mb-4">
           <Countdown embedded lang={lang} />
         </div>
 
-        <p className="text-center font-sans text-base md:text-lg text-black/90 mt-4 mb-2">
+        <p className="text-center font-sans text-base md:text-lg lg:text-xl text-black/90 mt-4 md:mt-6 mb-2">
           {t.houppa}
         </p>
 
-        <p className="text-center font-sans text-lg md:text-xl text-black mb-1 mt-8 md:mt-12">
+        <p className="text-center font-sans text-lg md:text-xl lg:text-2xl text-black mb-1 mt-8 md:mt-12">
           {t.venue}
         </p>
-        <p className="text-center font-sans text-base text-black/80 mb-4">
+        <p className="text-center font-sans text-base md:text-lg text-black/80 mb-4">
           {t.afterCeremony}
         </p>
 

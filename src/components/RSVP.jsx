@@ -138,7 +138,7 @@ function Confetti() {
 }
 
 const inputBase =
-  'w-full px-4 py-3 rounded-lg border border-black/30 bg-[#F3E3FF] text-black placeholder:text-black/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
+  'w-full px-4 py-3 md:py-3.5 rounded-lg border border-black/30 bg-[#F3E3FF] text-black md:text-lg placeholder:text-black/50 focus:border-coral focus:ring-2 focus:ring-coral/20 outline-none transition-all duration-200'
 
 const emptyGuest = () => ({ name: '' })
 
@@ -256,14 +256,14 @@ export default function RSVP({ lang = 'heb' }) {
         id="rsvp"
         className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] overflow-hidden"
       >
-        <div className="max-w-lg mx-auto text-center">
-          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-10 border border-coral/20 animate-fade-in-up">
-            <div className="w-14 h-14 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4 animate-bounce-in">
-              <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="max-w-lg md:max-w-xl lg:max-w-2xl mx-auto text-center">
+          <div className="bg-[#FFE9CF] rounded-2xl shadow-soft-lg p-6 md:p-12 border border-coral/20 animate-fade-in-up">
+            <div className="w-14 h-14 md:w-18 md:h-18 rounded-full bg-coral/15 flex items-center justify-center mx-auto mb-4 md:mb-6 animate-bounce-in">
+              <svg className="w-7 h-7 md:w-9 md:h-9 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="font-display text-2xl text-black mb-2">{t.thankYou}</h2>
+            <h2 className="font-display text-2xl md:text-3xl text-black mb-2">{t.thankYou}</h2>
             <p className="text-black/80">{t.successMsg}</p>
           </div>
           <div id="contact" className="mt-6 pt-4 md:mt-12 md:pt-8 border-t border-black/20 text-center">
@@ -288,18 +288,18 @@ export default function RSVP({ lang = 'heb' }) {
       id="rsvp"
       className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] text-black overflow-hidden"
     >
-      <div className="max-w-lg mx-auto">
-        <h2 className="font-opensans text-3xl md:text-4xl text-center text-black mb-2">
+      <div className="max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
+        <h2 className="font-opensans text-3xl md:text-4xl lg:text-5xl text-center text-black mb-2 md:mb-4">
           {t.rsvp}
         </h2>
-        <p className="text-center font-sans text-base text-black/80 mb-4 md:mb-8">
+        <p className="text-center font-sans text-base md:text-lg text-black/80 mb-4 md:mb-8">
           {t.intro}
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           {/* Guest count selector */}
           <div className="flex items-center justify-between gap-4">
-            <label className="font-sans text-sm font-medium text-black">{t.adults}</label>
+            <label className="font-sans text-sm md:text-base font-medium text-black">{t.adults}</label>
             <div className="flex items-center border border-black/30 rounded-lg overflow-hidden bg-[#F3E3FF]">
               <button
                 type="button"
