@@ -15,8 +15,11 @@ const texts = {
     groomNames: 'מר וגברת נעים ומישל ציטיאט',
     intro: "בשמחה רבה ובהודיה אינסופית לה' אנו שמחים להזמינכם לחגוג עמנו את נישואי ילדינו",
     date: '25 במאי 2026',
+    houppa: 'החופה תתקיים בשעה שש בדיוק',
     venue: 'EAST-TLV',
     afterCeremony: 'מיטב 13 תל אביב',
+    shuttle1: 'תצא הסעה מאורגנת מירושלים.',
+    shuttle2: 'עדכון לגבי נקודת המפגש ושעת היציאה יישלח אליכם בהמשך.',
     footer: 'בליבנו זיכרון סבינו וסבתותינו שאינם עמנו עוד, אך שמחתנו מהדהדת גם עבורם',
     ariaWaze: 'ווייז',
   },
@@ -27,8 +30,11 @@ const texts = {
     groomNames: 'M. & Mme Naïm et Michelle Tsityat',
     intro: "Ont la joie de vous inviter au mariage de",
     date: '25 mai 2026',
+    houppa: 'La Houppa aura lieu à 18:00 précise',
     venue: 'EAST-TLV',
     afterCeremony: 'Meitav 13 Tel-Aviv',
+    shuttle1: 'Une navette organisée sera mise à votre disposition au départ de Jérusalem.',
+    shuttle2: 'Les détails concernant le lieu de rendez-vous et l\'heure de départ vous seront communiqués prochainement.',
     footer: 'Dans nos cœurs, le souvenir de nos grands-parents qui ne sont plus avec nous, mais notre joie résonne aussi pour eux.',
     ariaWaze: 'Waze',
   },
@@ -68,6 +74,10 @@ export default function InvitationDetails({ lang = 'heb' }) {
           <Countdown embedded lang={lang} />
         </div>
 
+        <p className="text-center font-sans text-base md:text-lg text-black/90 mt-4 mb-2">
+          {t.houppa}
+        </p>
+
         <p className="text-center font-sans text-lg md:text-xl text-black mb-1 mt-8 md:mt-12">
           {t.venue}
         </p>
@@ -88,6 +98,22 @@ export default function InvitationDetails({ lang = 'heb' }) {
             </svg>
           </a>
         </div>
+
+        <div className="text-center font-sans text-sm md:text-base text-black/80 max-w-md mx-auto leading-relaxed">
+          <p>{t.shuttle1}</p>
+          <p>{t.shuttle2}</p>
+        </div>
+
+        {lang === 'fr' && (
+          <a
+            href="https://israel-entry.piba.gov.il/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center font-sans text-sm text-black underline hover:opacity-70 transition-opacity mt-6"
+          >
+            Formulaire d'entrée en Israël
+          </a>
+        )}
 
         <p className="text-center font-sans text-sm text-black/70 mt-8 max-w-md mx-auto leading-relaxed">
           {t.footer}
