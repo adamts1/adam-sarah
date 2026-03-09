@@ -15,7 +15,7 @@ const texts = {
     groomNames: 'מר וגברת נעים ומישל ציטיאט',
     intro: "בשמחה רבה ובהודיה אינסופית לה' אנו שמחים להזמינכם לחגוג עמנו את נישואי ילדינו",
     date: '25 במאי 2026',
-    houppa: 'החופה תתקיים בשעה שש בדיוק',
+    houppa: 'החופה תתקיים בשעה 18:00 בדיוק',
     venue: 'EAST-TLV',
     afterCeremony: 'מיטב 13 תל אביב',
     shuttle1: 'תצא הסעה מאורגנת מירושלים.',
@@ -35,7 +35,7 @@ const texts = {
     afterCeremony: 'Meitav 13 Tel-Aviv',
     shuttle1: 'Une navette organisée sera mise à votre disposition au départ de Jérusalem.',
     shuttle2: 'Les détails concernant le lieu de rendez-vous et l\'heure de départ vous seront communiqués prochainement.',
-    footer: 'Dans nos cœurs, le souvenir de nos grands-parents qui ne sont plus avec nous, mais notre joie résonne aussi pour eux.',
+    footer: '',
     ariaWaze: 'Waze',
   },
 }
@@ -74,7 +74,7 @@ export default function InvitationDetails({ lang = 'heb' }) {
           <Countdown embedded lang={lang} />
         </div>
 
-        <p className="text-center font-sans text-base md:text-lg lg:text-xl text-black/90 mt-4 md:mt-6 mb-2">
+        <p className="text-center font-sans text-xl md:text-2xl lg:text-3xl text-black/90 mt-8 md:mt-10 mb-2">
           {t.houppa}
         </p>
 
@@ -105,14 +105,17 @@ export default function InvitationDetails({ lang = 'heb' }) {
         </div>
 
         {lang === 'fr' && (
-          <a
-            href="https://israel-entry.piba.gov.il/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block text-center font-sans text-sm text-black underline hover:opacity-70 transition-opacity mt-6"
-          >
-            Formulaire d'entrée en Israël
-          </a>
+          <div className="text-center font-sans text-sm text-black/80 max-w-md mx-auto leading-relaxed mt-6">
+            <p>Nous vous rappelons qu'une autorisation électronique de voyage (ETA-IL) est désormais obligatoire pour entrer en Israël. Pensez à faire votre demande en ligne avant le départ.</p>
+            <a
+              href="https://israel-entry.piba.gov.il/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-black underline hover:opacity-70 transition-opacity mt-2"
+            >
+              Formulaire d'entrée en Israël
+            </a>
+          </div>
         )}
 
         <p className="text-center font-sans text-sm text-black/70 mt-8 max-w-md mx-auto leading-relaxed">
