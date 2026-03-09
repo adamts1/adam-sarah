@@ -213,19 +213,23 @@ export default function RSVP({ lang = 'heb' }) {
         .map((g, i) => `${i + 1}. ${g.name}`)
         .join('\n') + `\nPhone: ${phone.trim()}`
 
-      const emailParams = {
-        to_email: import.meta.env.VITE_NOTIFICATION_EMAIL,
-        guest_count: String(guests.length),
-        guest_list: guestList,
-        message: message.trim() || '—',
-      }
+      const recipients = (import.meta.env.VITE_NOTIFICATION_EMAIL || '').split(',').map(e => e.trim()).filter(Boolean)
 
       try {
-        await emailjs.send(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-          emailParams,
-          import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        await Promise.all(
+          recipients.map((email) =>
+            emailjs.send(
+              import.meta.env.VITE_EMAILJS_SERVICE_ID,
+              import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+              {
+                to_email: email,
+                guest_count: String(guests.length),
+                guest_list: guestList,
+                message: message.trim() || '—',
+              },
+              import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+            )
+          )
         )
       } catch {
         // Email failure is non-critical — data is already saved in Supabase
