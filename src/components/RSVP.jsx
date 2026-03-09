@@ -12,7 +12,7 @@ import celebrationMusic from '../../assets/music.mp3'
 const texts = {
   heb: {
     rsvp: 'אישור הגעה',
-    intro: 'מחכים בקוצר רוח לחגוג איתכם את הרגעים היקרים הללו!',
+    intro: 'מחכים לחגוג איתכם את היום המיוחד הזה!',
     contactTitle: 'יצירת קשר',
     adam: 'אדם',
     sarah: 'שרה',
