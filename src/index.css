@@ -55,6 +55,37 @@
   }
 }
 
+/* Firecracker burst animation */
+@keyframes fireworkLaunch {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(var(--launch-height, -40vh)) scale(1);
+  }
+}
+
+@keyframes fireworkBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--burst-x), var(--burst-y)) scale(0.2);
+  }
+}
+
+@keyframes fireworkGlow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.6; }
+}
+
 /* Force contact section LTR – never changes in Hebrew/RTL */
 #contact {
   direction: ltr !important;

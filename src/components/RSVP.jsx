@@ -78,19 +78,19 @@ function validateGuests(guests, phone, lang) {
 }
 
 const CONFETTI_COLORS = ['#FFD700', '#FF6B6B', '#C084FC', '#F472B6', '#34D399', '#60A5FA', '#FBBF24', '#F3E3FF']
-const CONFETTI_SHAPES = ['circle', 'square', 'heart']
+const CONFETTI_SHAPES = ['circle', 'square', 'heart', 'love']
 
-function makePieces(count, direction) {
+function makePieces(count, direction, wave = 0) {
   return Array.from({ length: count }, (_, i) => ({
-    id: `${direction}-${i}`,
+    id: `${direction}-w${wave}-${i}`,
     left: Math.random() * 100,
-    delay: Math.random() * 2,
-    duration: 2.5 + Math.random() * 2,
-    size: 6 + Math.random() * 10,
+    delay: wave * 1.5 + Math.random() * 2,
+    duration: 2.5 + Math.random() * 2.5,
+    size: 5 + Math.random() * 14,
     color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
     shape: CONFETTI_SHAPES[Math.floor(Math.random() * CONFETTI_SHAPES.length)],
     rotation: Math.random() * 360,
-    drift: -30 + Math.random() * 60,
+    drift: -50 + Math.random() * 100,
     direction,
   }))
 }
@@ -99,7 +99,18 @@ function Confetti() {
   const [pieces, setPieces] = useState([])
 
   useEffect(() => {
-    setPieces([...makePieces(40, 'down'), ...makePieces(40, 'up')])
+    // 3 waves of confetti for a bigger celebration effect
+    setPieces([
+      ...makePieces(60, 'down', 0),
+      ...makePieces(60, 'up', 0),
+      ...makePieces(50, 'down', 1),
+      ...makePieces(50, 'up', 1),
+      ...makePieces(40, 'down', 2),
+      ...makePieces(40, 'up', 2),
+    ])
+    // Clean up after all animations finish (wave2 delay 3s + max duration 5s + buffer)
+    const timer = setTimeout(() => setPieces([]), 10000)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -119,6 +130,20 @@ function Confetti() {
             <svg width={p.size} height={p.size} viewBox="0 0 24 24" fill={p.color}>
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
+          ) : p.shape === 'love' ? (
+            <span
+              style={{
+                display: 'block',
+                fontSize: p.size * 0.8,
+                fontWeight: 'bold',
+                color: p.color,
+                transform: `rotate(${p.rotation}deg)`,
+                whiteSpace: 'nowrap',
+                lineHeight: 1,
+              }}
+            >
+              Love
+            </span>
           ) : (
             <span
               style={{
@@ -132,6 +157,114 @@ function Confetti() {
             />
           )}
         </span>
+      ))}
+    </div>
+  )
+}
+
+const FIREWORK_COLORS = ['#FFD700', '#FF6B6B', '#C084FC', '#F472B6', '#60A5FA', '#FBBF24', '#34D399', '#FF4500']
+
+function makeFireworks(count) {
+  return Array.from({ length: count }, (_, i) => {
+    const x = 10 + Math.random() * 80 // launch position (%)
+    const launchHeight = 30 + Math.random() * 40 // how high it goes (vh)
+    const delay = Math.random() * 4 // stagger launches
+    const color = FIREWORK_COLORS[Math.floor(Math.random() * FIREWORK_COLORS.length)]
+    const sparks = Array.from({ length: 12 }, (_, j) => {
+      const angle = (j / 12) * Math.PI * 2
+      const dist = 40 + Math.random() * 60
+      return {
+        id: `spark-${i}-${j}`,
+        burstX: `${Math.cos(angle) * dist}px`,
+        burstY: `${Math.sin(angle) * dist}px`,
+        size: 3 + Math.random() * 5,
+        duration: 0.8 + Math.random() * 0.6,
+        color,
+      }
+    })
+    return { id: `fw-${i}`, x, launchHeight, delay, color, sparks }
+  })
+}
+
+function Firecrackers() {
+  const [fireworks, setFireworks] = useState([])
+
+  useEffect(() => {
+    setFireworks(makeFireworks(8))
+    // Add a second burst after a delay
+    const timer2 = setTimeout(() => {
+      setFireworks((prev) => [...prev, ...makeFireworks(6)])
+    }, 3000)
+    // Clean up after all animations finish (3s second burst + 4s max delay + 1.4s burst + buffer)
+    const cleanup = setTimeout(() => setFireworks([]), 10000)
+    return () => { clearTimeout(timer2); clearTimeout(cleanup) }
+  }, [])
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {fireworks.map((fw) => (
+        <div
+          key={fw.id}
+          className="absolute"
+          style={{
+            left: `${fw.x}%`,
+            bottom: '0%',
+          }}
+        >
+          {/* Launch trail */}
+          <div
+            style={{
+              width: 3,
+              height: 20,
+              background: `linear-gradient(to top, transparent, ${fw.color})`,
+              borderRadius: 2,
+              animation: `fireworkLaunch 0.8s ease-out ${fw.delay}s forwards`,
+              '--launch-height': `-${fw.launchHeight}vh`,
+              opacity: 0,
+              animationFillMode: 'forwards',
+            }}
+          />
+          {/* Burst sparks */}
+          <div
+            className="absolute"
+            style={{
+              bottom: 0,
+              left: '50%',
+              transform: `translateY(-${fw.launchHeight}vh)`,
+            }}
+          >
+            {fw.sparks.map((s) => (
+              <span
+                key={s.id}
+                className="absolute"
+                style={{
+                  width: s.size,
+                  height: s.size,
+                  backgroundColor: s.color,
+                  borderRadius: '50%',
+                  boxShadow: `0 0 6px 2px ${s.color}`,
+                  animation: `fireworkBurst ${s.duration}s ease-out ${fw.delay + 0.8}s forwards`,
+                  '--burst-x': s.burstX,
+                  '--burst-y': s.burstY,
+                  opacity: 0,
+                  animationFillMode: 'forwards',
+                }}
+              />
+            ))}
+            {/* Glow effect */}
+            <div
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: '50%',
+                background: `radial-gradient(circle, ${fw.color}40, transparent 70%)`,
+                animation: `fireworkGlow 1s ease-out ${fw.delay + 0.8}s forwards`,
+                opacity: 0,
+              }}
+            />
+          </div>
+        </div>
       ))}
     </div>
   )
@@ -234,6 +367,7 @@ export default function RSVP({ lang = 'heb' }) {
       try {
         const audio = new Audio(celebrationMusic)
         audio.volume = 0.5
+        audio.currentTime = 1
         audio.play()
       } catch {
         // Audio playback is non-critical
@@ -250,6 +384,7 @@ export default function RSVP({ lang = 'heb' }) {
     return (
       <>
       <Confetti />
+      <Firecrackers />
       <section
         id="rsvp"
         className="py-8 md:min-h-screen md:flex md:flex-col md:justify-center md:py-24 px-4 md:px-10 bg-[#FFE9CF] overflow-hidden"
