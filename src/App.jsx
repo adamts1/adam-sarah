@@ -38,7 +38,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 app-scroll safe-area-bottom">
+      <main className="flex-1 app-scroll ">
         <div key={lang} className="animate-page-enter opacity-0">
           <Hero lang={lang} />
           <SectionDivider />
