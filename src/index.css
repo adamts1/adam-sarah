@@ -20,6 +20,34 @@
   overflow-x: clip;
 }
 
+/* App-shell scrolling: prevent document scroll, only internal container scrolls */
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Smooth scrolling + iOS momentum scrolling for internal scrollers */
+.app-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scroll-behavior: smooth;
+}
+
+/* Safe area padding for top-level app chrome (notched devices) */
+.safe-area-padding {
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+  padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+  padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+}
+
+/* Safe area for bottom padding (home indicator) */
+.safe-area-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
 /* Safe area for fixed elements on notched devices */
 .safe-area-inset {
   top: max(0.75rem, env(safe-area-inset-top, 0px));
