@@ -18,8 +18,8 @@ const texts = {
     houppa: 'החופה תתקיים בשעה 18:00 בדיוק',
     venue: 'EAST-TLV',
     afterCeremony: 'מיטב 13 תל אביב',
-    shuttle1: 'תצא הסעה מאורגנת מירושלים.',
-    shuttle2: 'עדכון לגבי נקודת המפגש ושעת היציאה יישלח אליכם בהמשך.',
+    parking1: 'קיימת חניית רכבים בסמוך לאולם, ברחוב קרמניצקי 14, תל אביב.',
+    parking2: 'מומלץ להגיע מעט מוקדם לנוחות מירבית.',
     footer: '',
     ariaWaze: 'ווייז',
   },
@@ -33,8 +33,8 @@ const texts = {
     houppa: 'La Houppa aura lieu à 18:00 précise',
     venue: 'EAST-TLV',
     afterCeremony: 'Meitav 13 Tel-Aviv',
-    shuttle1: 'Une navette organisée sera mise à votre disposition au départ de Jérusalem.',
-    shuttle2: 'Les détails concernant le lieu de rendez-vous et l\'heure de départ vous seront communiqués prochainement.',
+    parking1: 'Un parking est disponible à proximité de la salle, au 14 rue Karmenitzky, Tel-Aviv.',
+    parking2: 'Nous vous recommandons d\'arriver un peu en avance pour un maximum de confort.',
     footer: '',
     ariaWaze: 'Waze',
   },
@@ -100,8 +100,8 @@ export default function InvitationDetails({ lang = 'heb' }) {
         </div>
 
         <div className="text-center font-sans text-sm md:text-base text-black/80 max-w-md mx-auto leading-relaxed">
-          <p>{t.shuttle1}</p>
-          <p>{t.shuttle2}</p>
+          <p>{t.parking1}</p>
+          <p>{t.parking2}</p>
         </div>
 
         {lang === 'fr' && (
